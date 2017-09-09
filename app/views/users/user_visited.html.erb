@@ -1,0 +1,7 @@
+<h1>Destinations you've already visited:</h1>
+
+<% @destinations.each do |destination| %>
+  <% unless destination.nil? %>
+    <%= render partial: "users/destination", locals: {destination: destination} %>
+  <% end %>
+<% end %>

@@ -1,0 +1,17 @@
+<h1>Welcome <%= @user.username %>!</h1>
+  <% if @user.destinations.empty? %>
+    <h3>It looks like you are up to something exciting,</h3>
+    <%= link_to "Let's add a new destination!", new_destination_path %>
+  <% else %>
+    <%= link_to "Add a new destination", new_destination_path %>
+    <!-- TOdo: path to visited destinations -->
+    <%= link_to "See the places you've visited" %>
+    <h4>Your bucket list:</h4>
+      <% @user.destinations.each do |destination| %>
+        <% if destination.visited %>
+          <%= render partial: "users/destination", locals: {destination: destination} %>
+        <% else %>
+          <%= render partial: "users/destination", locals: {destination: destination} %>
+        <% end %>
+      <% end %>
+    <% end %>
