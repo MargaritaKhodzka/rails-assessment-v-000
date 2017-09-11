@@ -1,0 +1,19 @@
+<% if @destination.errors.any? %>
+  <ul>
+  <% @destination.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+
+
+<%= form_for @destination do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <%= f.label :description %>
+  <%= f.text_area :description %><br>
+  <%= f.label :category, "Category" %><br>
+  <%= f.text_field :category %>
+  <%= f.check_box :visited %>
+  <%= label :visited, "Check box if you have visited the destination" %>
+  <%= f.submit %>
+<% end %>
