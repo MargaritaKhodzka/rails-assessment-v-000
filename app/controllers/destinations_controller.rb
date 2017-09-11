@@ -1,8 +1,12 @@
 class DestinationsController < ApplicationController
-  before_action :authenticate_user, only: [:new, :create, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
 
   def index
     @destinations = Destination.all
+  end
+
+  def show
+    @destination = Destination.find(params[:id])
   end
 
   def new
@@ -27,8 +31,7 @@ class DestinationsController < ApplicationController
   def update
     @destination = Destination.find(params[:id])
     if @destination.update(destination_params)
-      flash[:notice] = "Destinations is updated!"
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user), notice: "Destination is updated!"
     else
       flash[:alert] = "Destination hasn't been updated."
       render :edit
@@ -38,8 +41,7 @@ class DestinationsController < ApplicationController
   def destroy
     @destination = Destination.find(params[:id])
     @destination.destroy
-    flash[:notice] = "Destination has been deleted from your bucket list"
-    redirect_to user_path(current_user)
+    redirect_to user_path(current_user), notice: "Destination has been deleted from your bucket list"
   end
 
   private
