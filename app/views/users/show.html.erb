@@ -1,17 +1,20 @@
-<h1>Welcome <%= @user.username %>!</h1>
-  <% if @user.destinations.empty? %>
-    <h3>It looks like you are up to something exciting,</h3>
-    <%= link_to "Let's add a new destination!", new_destination_path %>
-  <% else %>
-    <%= link_to "Add a new destination", new_destination_path %>
-    <!-- TOdo: path to visited destinations -->
-    <%= link_to "See the places you've visited" %>
-    <h4>Your bucket list:</h4>
-      <% @user.destinations.each do |destination| %>
-        <% if destination.visited %>
-          <%= render partial: "users/destination", locals: {destination: destination} %>
-        <% else %>
-          <%= render partial: "users/destination", locals: {destination: destination} %>
-        <% end %>
+<% if @user.destinations.empty? %>
+  <h3>It looks like you are up to something exciting,</h3>
+  <%= link_to "Let's add a new destination!", new_destination_path %>
+<% else %>
+  <%= link_to "Add a new destination", new_destination_path %><br>
+  <%= link_to "See the places you've visited", visited_destinations_path %>
+
+  <h2>Your bucket list:</h2>
+    <% @user.destinations.each do |destination| %>
+      <% if destination.visited %>
+        <h3>You have visited these destinations:</h3>
+        <p><%= destination.name.upcase %> - <%= destination.description %></p>
+        <%= link_to "See More", destination_path(destination) %>
+      <% else %>
+        <h3>Destinations you have yet to visit:</h3>
+        <p><%= destination.name.upcase %> - <%= destination.description %></p>
+        <%= link_to "See More", destination_path(destination) %>
       <% end %>
     <% end %>
+  <% end %>

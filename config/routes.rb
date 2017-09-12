@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
-  get '/visited_destinations', to: 'users#user_visited'
+  get '/visited_destinations' => 'users#user_visited'
 
 
 end

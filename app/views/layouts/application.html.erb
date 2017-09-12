@@ -2,51 +2,36 @@
 <html>
   <head>
     <title>TravelBucketList</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+
+    <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+    <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+    <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
 
     <a class="navbar-brand" href="/">TRAVEL BUCKET LIST</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <% if signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", user_path(current_user), class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "Add Destination", new_destination_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
-          </li>
+            <h3>Welcome <%= current_user.email if current_user %> </h3>
+            <%= link_to "Home", user_path(current_user), class: "nav-link" %><br>
+            <%= link_to "Destinations", destinations_path, class: "nav-link" %><br>
+            <%= link_to "Add Destination", new_destination_path, class: "nav-link" %><br>
+            <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link" %><br>
         <% else %>
-          <li class="nav-item active">
-            <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
-          </li>
+          <p>Please sign up or log in!</p>
+          <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %><br>
+          <%= link_to "Sign In", new_user_session_path, class: "nav-link" %><br>
+          <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %><br>
         <% end %>
       </ul>
     </div>
   </nav>
-
-  <% if alert.present? %>
-    <p class="alert alert-danger"><%= alert %></p>
-  <% end %>
-
-  <% if notice.present? %>
-    <p class="alert alert-success"><%= notice %></p>
-  <% end %>
 
   <%= yield %>
 
