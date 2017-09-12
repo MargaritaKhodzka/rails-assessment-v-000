@@ -7,10 +7,12 @@ class DestinationsController < ApplicationController
 
   def show
     @destination = Destination.find(params[:id])
+    @category = @destination.categories.build
   end
 
   def new
     @destination = Destination.new
+    @category = @destination.categories.build
   end
 
   def create
@@ -31,9 +33,10 @@ class DestinationsController < ApplicationController
   def update
     @destination = Destination.find(params[:id])
     if @destination.update(destination_params)
-      redirect_to user_path(current_user), notice: "Destination is updated!"
+      flash[:notice] = "Destination successfully updated."
+      redirect_to user_path(current_user)
     else
-      flash[:alert] = "Destination hasn't been updated."
+      flash[:alert] = "Destination not updated."
       render :edit
     end
   end

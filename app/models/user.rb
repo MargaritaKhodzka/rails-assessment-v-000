@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :destinations
   has_many :categories, through: :destinations
 
-  validates :username, :email, presence: true
+  validates :email, presence: true
   validates :email, uniqueness: true
   validates :password, length: { in: 6..20 }
   # Include default devise modules. Others available are:
@@ -11,10 +11,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
+
    def self.from_omniauth(auth)
      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
        user.email = auth.info.email
-       user.username = auth.info.nickname
        user.password = Devise.friendly_token[0,20]
      end
    end

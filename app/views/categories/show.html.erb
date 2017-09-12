@@ -1,0 +1,4 @@
+<h1><%= @category.title %></h1>
+
+<%= link_to "Back", destination_path(@category.destination) %>
+<%= link_to "Delete Category", destination_category_path(@category.destination, @category), method: :delete, data: {confirm: 'Are you sure you want to delete this category?'} %>

@@ -1,6 +1,8 @@
-<h1><%= Your destinations %>:</h1>
+<h1>Destinations</h1>
 <ul>
-<% @destinations.each do |destination| %>
-  <li><%= link_to destination %></li>
-<% end %>
+  <% @destinations.each do |destination| %>
+    <li><%= link_to "Show #{destination.name}", destination_path(destination) %></li>
+  <% end %>
 </ul>
+
+<%= link_to "New Destination", new_destination_path(@destination) %>

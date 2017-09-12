@@ -4,16 +4,23 @@
     <li><%= message %></li>
   <% end %>
   </ul>
+<% end %>
 
 
 <%= form_for @destination do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %><br>
   <%= f.label :description %>
-  <%= f.text_area :description %><br>
-  <%= f.label :category, "Category" %><br>
-  <%= f.text_field :category %>
-  <%= f.check_box :visited %>
-  <%= label :visited, "Check box if you have visited the destination" %>
+  <%= f.text_area :description %><br><br>
+  <%= f.check_box :visited %> &nbsp;
+  <%= label :visited, "Check box if you visited this destination." %><br>
+
+  <p>Add a category to your destination (beach, city, mountains, etc):</p>
+  <%= f.fields_for :categories do |category_builder| %>
+    <%= category_builder.label :title %>
+    <%= category_builder.text_field :title %>
+  <% end %>
+  <br><br>
+
   <%= f.submit %>
 <% end %>
