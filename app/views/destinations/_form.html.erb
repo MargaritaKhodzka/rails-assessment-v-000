@@ -15,10 +15,10 @@
   <%= f.check_box :visited %> &nbsp;
   <%= label :visited, "Check box if you visited this destination." %><br>
 
-  <p>Add a category to your destination (beach, city, mountains, etc):</p>
-  <%= f.fields_for :categories do |category_builder| %>
-    <%= category_builder.label :title %>
-    <%= category_builder.text_field :title %>
+<p>Add a category to your destination (beach, city, mountains, etc):</p>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :title %>
+  <%= f.fields_for :categories, @destination.categories.build do |categories_fields| %><br>
+    <%= categories_fields.text_field :title %>
   <% end %>
   <br><br>
 

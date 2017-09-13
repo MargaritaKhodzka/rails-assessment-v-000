@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  has_many :destinations
-  has_many :categories, through: :destinations
+  has_many :user_destinations
+  has_many :destinations, through: :user_destinations
+  has_many :categories
 
   validates :email, presence: true
   validates :email, uniqueness: true
@@ -18,4 +19,11 @@ class User < ApplicationRecord
        user.password = Devise.friendly_token[0,20]
      end
    end
+
+   def visited_destinations
+     self.destinations.select do |destination|
+       destination.visited == true
+     end
+   end
+
 end

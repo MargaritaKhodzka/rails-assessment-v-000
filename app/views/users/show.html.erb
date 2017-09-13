@@ -4,17 +4,21 @@
 <% else %>
   <%= link_to "Add a new destination", new_destination_path %><br>
   <%= link_to "See the places you've visited", visited_destinations_path %>
+<% end %>
 
   <h2>Your bucket list:</h2>
+    <h3>You have visited these destinations:</h3>
     <% @user.destinations.each do |destination| %>
       <% if destination.visited %>
-        <h3>You have visited these destinations:</h3>
-        <p><%= destination.name.upcase %> - <%= destination.description %></p>
-        <%= link_to "See More", destination_path(destination) %>
-      <% else %>
-        <h3>Destinations you have yet to visit:</h3>
         <p><%= destination.name.upcase %> - <%= destination.description %></p>
         <%= link_to "See More", destination_path(destination) %>
       <% end %>
     <% end %>
-  <% end %>
+
+    <h3>You have not visited these destinations:</h3>
+    <% @user.destinations.each do |destination| %>
+      <% if !destination.visited %>
+        <p><%= destination.name.upcase %> - <%= destination.description %></p>
+        <%= link_to "See More", destination_path(destination) %>
+      <% end %>
+    <% end %>

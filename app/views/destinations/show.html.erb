@@ -2,9 +2,10 @@
 <p><%= @destination.description %></p>
 
 <h4>Categories:</h4>
+
 <ul>
 <% @destination.categories.each do |category| %>
-  <li><%= link_to "#{category.title}", destination_category_path(@destination) %></li>
+  <li><%= link_to category.title, destination_category_path(@destination, category) %></li>
 <% end %>
 </ul>
 

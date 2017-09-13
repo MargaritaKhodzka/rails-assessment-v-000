@@ -7,7 +7,6 @@ class DestinationsController < ApplicationController
 
   def show
     @destination = Destination.find(params[:id])
-    @category = @destination.categories.build
   end
 
   def new
@@ -16,7 +15,7 @@ class DestinationsController < ApplicationController
   end
 
   def create
-    @destination = current_user.destinations.build(destination_params)
+    @destination = Destination.new(destination_params)
     if @destination.save
       flash[:notice] = "You have added a new destination to your bucket list!"
       redirect_to user_path(current_user)
@@ -32,7 +31,8 @@ class DestinationsController < ApplicationController
 
   def update
     @destination = Destination.find(params[:id])
-    if @destination.update(destination_params)
+    @destination.update(destination_params)
+    if @destination.save
       flash[:notice] = "Destination successfully updated."
       redirect_to user_path(current_user)
     else
@@ -44,13 +44,14 @@ class DestinationsController < ApplicationController
   def destroy
     @destination = Destination.find(params[:id])
     @destination.destroy
-    redirect_to user_path(current_user), notice: "Destination has been deleted from your bucket list"
+    flash[:notice] = "Destination has been deleted from your bucket list"
+    redirect_to user_path(current_user)
   end
 
   private
 
   def destination_params
-    params.require(:destination).permit(:name, :description, :visited, :categories_attributes => [:title])
+    params.require(:destination).permit(:name, :desription, :visited, category_ids:[], categories_attributes: [:title])
   end
 
 end

@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   end
 
   def user_visited
-    @destinations = current_user.destinations.visited_destinations
+    @destinations = current_user.visited_destinations
   end
-
 end
