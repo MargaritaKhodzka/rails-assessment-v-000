@@ -1,0 +1,15 @@
+<ul class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
+  <li><%= link_to "Home", root_path, class: "nav-link" %></li>
+  <% if current_user %>
+    <li class="nav-item dropdown justify-content-end">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Welcome, <%= current_user.email %></a>
+      <div class="dropdown-menu">
+        <%= link_to "Destinations I have visited", visited_path, class: 'dropdown-item' %>
+        <%= link_to "My Destinations", destinations_path, class: 'dropdown-item' %>
+        <%= link_to "My Categories", categories_path, class: 'dropdown-item' %>
+        <div class="dropdown-divider"></div>
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+      </div>
+    </li>
+  <% end %>
+</ul>
