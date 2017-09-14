@@ -1,0 +1,6 @@
+<h1>Destinations you have visited:</h1>
+<ul>
+  <%= @visited.each do |v| %>
+    <li><%= link_to v.name, category_path(v) %></li>
+  <% end %>
+</ul>
