@@ -21,7 +21,7 @@ class User < ApplicationRecord
   end
 
   def visited_destinations
-    current_user.destinations.select do |destination|
+    destinations.select do |destination|
       destination.visited == true
     end
   end

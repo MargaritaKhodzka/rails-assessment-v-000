@@ -53,7 +53,7 @@ class CategoriesController < ApplicationController
 
   private
 
-  def categories_params
+  def category_params
     params.require(:category).permit(:title, :climate, :must_have_items)
   end
 
