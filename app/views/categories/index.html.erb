@@ -1,0 +1,12 @@
+<% if @destination %>
+  <h1>Your categories for <%= @destination.name %>:</h1>
+<% else %>
+  <h1>All destination categories:</h1>
+<% end %>
+
+<% if @categories != [] %>
+  <%= render (@categories) %>
+  <div><%= button_to 'Add more categories', new_destination_category_path, class: 'btn btn-primary', method: :get if @destination %></div>
+<% else %>
+  <div><h3>You don't have any categories yet</h3></div>
+<% end %>

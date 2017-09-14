@@ -8,7 +8,7 @@ class DestinationsController < ApplicationController
   end
 
   def new
-    @destination = Destination.new(user_id: current_user.id])
+    @destination = Destination.new(user_id: current_user.id)
     @destination.categories.build
   end
 
