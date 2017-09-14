@@ -1,26 +1,23 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :new, :create]
+  before_action :authenticate_user!
+  before_action :find_destination, only: %i[index new create]
+  before_action :current_category, only: %i[show edit update destroy]
 
-  def show
+  def index
     if params[:destination_id]
-      @destination = Destination.find_by(id: params[:destination_id])
-      @category = @destination.categories.find_by(id: params[:id])
-      if @category.nil?
-        flash[:alert] = "Category not found."
-        redirect_to destination_categories_path(@destination)
-      end
+      @categories = @destination.categories
     else
-      @category = Category.find(params[:id])
+      @categories = current_user.try(:categories)
     end
   end
 
   def new
-    @category = Category.new
-    redirect_to categories_path
+    @category = @destination.categories.build
   end
 
   def create
     @category = Category.new(category_params)
+    @category.destination_ids = params[:destination_id]
     if @category.save
       redirect_to @category
     else
@@ -28,17 +25,44 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def show
+    @destinations = @category.destinations
+  end
+
+  def edit
+
+  end
+
+  def update
+    if @category.update(category_params)
+      redirect_to @category
+    else
+      render :edit
+    end
+  end
+
+
   def destroy
-    @category = Category.find(params[:id])
-    @category.destroy
-    flash[:notice] = "Category has been deleted."
-    redirect_to user_path(current_user)
+    title = @category.title
+    if @category.delete
+      redirect_to categories_path, notice: "#{title} deleted successfully."
+    else
+      render :show
+    end
   end
 
   private
 
   def categories_params
-    params.require(:category).permit(:title, :destination_name)
+    params.require(:category).permit(:title, :climate, :must_have_items)
+  end
+
+  def find_destination
+    @destination = Destination.find_by(id: params[:destination_id])
+  end
+
+  def current_category
+    @category = Category.find_by(id: params[:id])
   end
 
 end

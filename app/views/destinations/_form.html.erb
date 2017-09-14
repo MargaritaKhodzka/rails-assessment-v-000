@@ -1,18 +1,19 @@
-<% if @destination.errors.any? %>
+<!-- <% if @destination.errors.any? %>
   <ul>
   <% @destination.errors.full_messages.each do |message| %>
     <li><%= message %></li>
   <% end %>
   </ul>
 <% end %>
+ -->
 
-
-<%= form_for @destination do |f| %>
+<%= form_for (@destination) do |f| %>
   <%= f.label :name %>
+  <%= f.hidden_field :user_id %>
   <%= f.text_field :name %><br>
   <%= f.label :description %>
   <%= f.text_area :description %><br><br>
-  <%= f.check_box :visited %> &nbsp;
+  <%= f.check_box :visited %>
   <%= label :visited, "Check box if you visited this destination." %><br>
 
 <p>Add a category to your destination (beach, city, mountains, etc):</p>

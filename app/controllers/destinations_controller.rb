@@ -1,57 +1,73 @@
 class DestinationsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :all_categories, only: %i[new create edit update]
+  before_action :current_destination, only: %i[update destroy]
 
   def index
-    @destinations = Destination.all
-  end
-
-  def show
-    @destination = Destination.find(params[:id])
+    @destinations = current_user.destinations
   end
 
   def new
-    @destination = Destination.new
-    @category = @destination.categories.build
+    @destination = Destination.new(user_id: current_user.id])
+    @destination.categories.build
   end
 
   def create
     @destination = Destination.new(destination_params)
     if @destination.save
-      flash[:notice] = "You have added a new destination to your bucket list!"
-      redirect_to user_path(current_user)
+      redirect_to @destination
     else
-      flash[:alert] = "Destination hasn't been saved to your bucket list."
       render :new
     end
   end
 
+  def show
+    if current_destination
+      @categories = @destination.categories
+      render :show
+    else
+      redirect_to destinations_path
+    end
+  end
+
   def edit
-    @destination = Destination.find(params[:id])
+    if current_destination
+      @destination.categories.build
+      render :edit
+    else
+      redirect_to destinations_path
+    end
   end
 
   def update
-    @destination = Destination.find(params[:id])
-    @destination.update(destination_params)
-    if @destination.save
-      flash[:notice] = "Destination successfully updated."
-      redirect_to user_path(current_user)
+    if @destination.update(destination_params)
+      redirect_to @destination
     else
-      flash[:alert] = "Destination not updated."
       render :edit
     end
   end
 
   def destroy
-    @destination = Destination.find(params[:id])
-    @destination.destroy
-    flash[:notice] = "Destination has been deleted from your bucket list"
-    redirect_to user_path(current_user)
+    name = @destination.name
+    if @destination.delete
+      redirect_to destinations_path, notice: "#{name} deleted successfully."
+    else
+      render :show
+    end
   end
 
   private
 
   def destination_params
-    params.require(:destination).permit(:name, :desription, :visited, category_ids:[], categories_attributes: [:title])
+    params.require(:destination).permit(:name, :desription, :country, :best_season_to_visit, :visited, :user_id, category_ids:[], categories_attributes: %i[title climate must_have_items])
+  end
+
+  def all_categories
+    @categories = current_user.categories
+  end
+
+  def current_destination
+    @destination = Destination.find_by(id: params[:id])
   end
 
 end

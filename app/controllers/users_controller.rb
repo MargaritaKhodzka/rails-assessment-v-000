@@ -4,7 +4,4 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def user_visited
-    @destinations = current_user.visited_destinations
-  end
 end

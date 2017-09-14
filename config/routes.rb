@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  root 'welcome#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   resources :destinations do
-    resources :categories, only: [:show, :create, :destroy]
+    resources :categories, only: %i[index create new edit]
   end
 
-  resources :users, only: [:show]
+  resources :categories
 
-  get '/visited_destinations' => 'users#user_visited'
+  authenticated :user do
+    root to: 'destinations#index', as: :authenticated_root
+  end
 
-
+  root 'welcome#home'
+  get 'visited', to: 'welcome#visited'
+  
 end

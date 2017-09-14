@@ -1,8 +1,8 @@
 <% if @user.destinations.empty? %>
   <h3>It looks like you are up to something exciting,</h3>
-  <%= link_to "Let's add a new destination!", new_destination_path %>
+  <%= link_to "Let's add a new destination!", new_user_destination_path(@user) %>
 <% else %>
-  <%= link_to "Add a new destination", new_destination_path %><br>
+  <%= link_to "Add a new destination", new_user_destination_path(@user) %><br>
   <%= link_to "See the places you've visited", visited_destinations_path %>
 <% end %>
 
@@ -11,7 +11,7 @@
     <% @user.destinations.each do |destination| %>
       <% if destination.visited %>
         <p><%= destination.name.upcase %> - <%= destination.description %></p>
-        <%= link_to "See More", destination_path(destination) %>
+        <%= link_to "See More", user_destination_path(@user, destination) %>
       <% end %>
     <% end %>
 
@@ -19,6 +19,6 @@
     <% @user.destinations.each do |destination| %>
       <% if !destination.visited %>
         <p><%= destination.name.upcase %> - <%= destination.description %></p>
-        <%= link_to "See More", destination_path(destination) %>
+        <%= link_to "See More", user_destination_path(@user, destination) %>
       <% end %>
     <% end %>
