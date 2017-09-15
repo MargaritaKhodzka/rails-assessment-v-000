@@ -1,41 +1,58 @@
 <%= render 'layouts/form_messages', object: destination %>
-
 <%= form_for destination do |f| %>
   <%= f.hidden_field :user_id %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %><br>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
 
-  <%= f.label :description %>
-  <%= f.text_area :description %><br>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
 
-  <%= f.label :coutry %>
-  <%= f.text_field :country %><br>
+  <div class="form-group">
+    <%= f.label :coutry %>
+    <%= f.text_field :country %>
+  </div>
 
-  <%= f.label :best_season_to_visit %>
-  <%= f.text_field :best_season_to_visit %><br>
+  <div class="form-group">
+    <%= f.label :best_season_to_visit %>
+    <%= f.text_field :best_season_to_visit %>
+  </div>
 
-  <%= f.check_box :visited %>
-  <%= label :visited, "Check box if you visited this destination.", class: 'form-control' %><br>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="checkbox" class="form-check-input">
+      Check box if you visited this destination.
+    </label>
+  </div>
 
-  <p><strong>Add a category to this destination:</strong></p>
-
-  <%= f.collection_check_boxes :category_ids, categories, :id, :title %><br>
-
-  <%= f.fields_for :categories, destination.categories.build do |c| %>
-    <%= c.label :title %>
-    <%= c.text_field :title %>
-
-    <%= c.label :climate %>
-    <%= c.text_field :climate %>
-
-    <%= c.label :must_have_items %>
-    <%= c.text_field :must_have_items %>
-  <% end %>
   <br><br>
+  <p><strong>Select a category to this destination...</strong></p>
+    <%= f.collection_check_boxes :category_ids, categories, :id, :title %><br><br>
+  <p><strong>...or add a new one:</strong></p>
+  <%= f.label :category %>
+  <%= f.fields_for :categories, destination.categories.build do |c| %>
+    <div class="form-check">
+      <%= c.label :title %>
+      <%= c.text_field :title %>
+    </div>
 
-  <%= f.submit class: 'btn btn-info' %>
-<% end %>
+    <div class="form-check">
+      <%= c.label :climate %>
+      <%= c.text_field :climate %>
+    </div>
+
+    <div class="form-check">
+      <%= c.label :must_have_items %>
+      <%= c.text_field :must_have_items %>
+    </div>
+  <% end %>
+  <br>
+
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
 <br>
-
 <%= link_to "Back", destinations_path %>

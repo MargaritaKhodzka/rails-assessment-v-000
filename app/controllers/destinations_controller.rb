@@ -59,7 +59,7 @@ class DestinationsController < ApplicationController
   private
 
   def destination_params
-    params.require(:destination).permit(:name, :desription, :country, :best_season_to_visit, :visited, :user_id, category_ids:[], categories_attributes: %i[title climate must_have_items])
+    params.require(:destination).permit(:name, :description, :country, :best_season_to_visit, :visited, :user_id, category_ids:[], categories_attributes: %i[title climate must_have_items])
   end
 
   def all_categories
