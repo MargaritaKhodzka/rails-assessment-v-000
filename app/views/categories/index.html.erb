@@ -2,7 +2,6 @@
 
 <% if @categories %>
   <%= render (@categories) %>
-  <%= button_to 'Add more categories', new_category_path, class: 'btn btn-primary', method: :get if @destination %>
 <% else %>
   <h3>You don't have any categories yet</h3>
 <% end %>

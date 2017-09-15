@@ -24,5 +24,6 @@
   </ul>
   <%= button_to 'Add a category', new_destination_category_path(@destination), class: 'btn btn-primary', method: :get %>
 <% end %>
+<br><br>
 
 <%= link_to 'Edit', edit_destination_path(@destination) %> - <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you sure you want to delete this destination?" } %> - <%= link_to 'Back', destinations_path(@destination) %>

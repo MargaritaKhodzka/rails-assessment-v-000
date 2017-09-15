@@ -6,8 +6,6 @@ Rails.application.routes.draw do
     resources :categories, only: %i[index create new edit show]
   end
 
-  resources :users, only: [:show]
-
   resources :categories do
     resources :destinations, only: %i[index create new edit show]
   end
