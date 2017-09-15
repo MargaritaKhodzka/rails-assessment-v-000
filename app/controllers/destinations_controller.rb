@@ -1,6 +1,6 @@
 class DestinationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :all_categories, only: %i[new create edit update]
+  before_action :all_categories, only: %i[new create edit update show]
   before_action :current_destination, only: %i[update destroy]
 
   def index

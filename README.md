@@ -1,24 +1,36 @@
-# README
+My Travel Bucket List
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#Introduction
 
-Things you may want to cover:
+This app allows users create their travel bucket lists, add new destinations, destination categories, and mark them completed
 
-* Ruby version
+#Usage
 
-* System dependencies
+Clone this repo and install the needed gems:
 
-* Configuration
+$ bundle install
+Next, migrate the database:
 
-* Database creation
+$ rails db:migrate
+Now run the app using:
 
-* Database initialization
+$ rails server
+Instructions
 
-* How to run the test suite
+To create an account, click "Sign Up", fill out the appropriate fields, then click "Submit". Alternatively, You can sign in using your Facebook account by clicking "Sign In with Facebook".
 
-* Services (job queues, cache servers, search engines, etc.)
+Once signed in, you can add to your list of destinations by clicking "Add a destination", where you fill out your new destination fields and add a destination category.
 
-* Deployment instructions
+To display the list of destinations, click on "My Destinations". To show visited destinations, click on "Destinations I have visited."
 
-* ...
+Clicking on a destination name once created will bring you to that individual destination's show page, where you can choose to either edit that destination's stats by clicking "Edit", or remove the destination by clicking "Delete". You can click "Back" to go back to the list of destinations.
+
+You can access your list of categories that you have by clicking on "My Categories".
+
+#Contributing
+
+Bug reports and pull requests are welcome on GitHub at [this project's repository][trainer-client-tracker]. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
+
+#License
+
+This Web Application is available as open source under the terms of the MIT License.
