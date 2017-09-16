@@ -1,7 +1,9 @@
 <h1>All categories:</h1>
 
 <% if @categories %>
-  <%= render (@categories) %>
+  <% @categories.each do |category| %>
+    <li><strong><%= link_to category.title, category_path(category) %></strong></li>
+  <% end %>
 <% else %>
   <h3>You don't have any categories yet</h3>
 <% end %>

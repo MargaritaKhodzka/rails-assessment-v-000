@@ -1,9 +1,0 @@
-<h1>Destinations you've already visited:</h1>
-
-<% @destinations.each do |destination| %>
-  <% unless destination.nil? %>
-    <p><%= destination.name.upcase %></p>
-    <p><%= destination.description %></p>
-    <%= link_to "See More", destination_path(destination) %>
-  <% end %>
-<% end %>
