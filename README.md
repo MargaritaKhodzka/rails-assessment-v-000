@@ -1,10 +1,10 @@
 My Travel Bucket List
 
-#Introduction
+#Application description
 
 This app allows users create their travel bucket lists, add new destinations, destination categories, and mark them completed
 
-#Usage
+#Installation guide
 
 Clone this repo and install the needed gems:
 
