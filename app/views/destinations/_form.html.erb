@@ -23,10 +23,8 @@
   </div>
 
   <div class="form-check">
-    <label class="form-check-label">
-      <input type="checkbox" class="form-check-input">
-      Check box if you visited this destination.
-    </label>
+    <%= f.check_box :visited, class: "form-check-input" %>
+    <%= label :visited, "Check box if you visited this destination." %>
   </div>
 
   <br><br>
