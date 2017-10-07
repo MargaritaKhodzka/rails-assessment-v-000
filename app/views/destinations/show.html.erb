@@ -4,7 +4,7 @@
 <p>Country: <%= @destination.country %></p>
 <p>Best season to visit: <%= @destination.best_season_to_visit %></p>
 
-<% if @destination.visited %>
+<% if current_user.visited_destinations.include?(@destination) %>
   <p><strong>You visited this destination!</strong></p>
 <% else %>
   <p><strong>You have not visited this destination yet.</strong></p>
