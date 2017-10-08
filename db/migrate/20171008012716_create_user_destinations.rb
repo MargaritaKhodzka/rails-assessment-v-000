@@ -4,8 +4,6 @@ class CreateUserDestinations < ActiveRecord::Migration[5.0]
       t.integer :user_id
       t.integer :destination_id
       t.boolean :visited
-
-      t.timestamps
     end
   end
 end

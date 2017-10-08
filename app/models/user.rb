@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :users_destinations
-  has_many :destinations, through: :users_destinations
+  has_many :user_destinations
+  has_many :destinations, through: :user_destinations
 
   has_many :categories, through: :destinations
 
