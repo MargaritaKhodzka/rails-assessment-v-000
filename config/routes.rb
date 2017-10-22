@@ -6,9 +6,7 @@ Rails.application.routes.draw do
     resources :categories, only: %i[index create new edit show]
   end
 
-  resources :categories do
-    resources :destinations, only: %i[index create new edit show]
-  end
+  resources :categories
 
   authenticated :user do
     root to: 'destinations#index', as: :authenticated_root

@@ -1,8 +1,8 @@
-<h1>Destinations you have visited:</h1>
+<h3>Destinations you have visited:</h3>
 <% @destinations.each do |destination| %>
   <% unless destination.nil? %>
   <p><%= destination.name.upcase %></p>
   <p><%= destination.description %></p>
-  <%= link_to "See More", destination_path(destination) %>
+  <%= link_to "See More", destination_path(destination) %><br><br>
   <% end %>
 <% end %>

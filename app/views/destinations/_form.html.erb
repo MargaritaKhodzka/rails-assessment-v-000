@@ -28,11 +28,10 @@
   </div>
   <br><br>
 
-   <section>
-   <p><strong>Select a category to this destination...</strong></p>
-     <%= f.collection_check_boxes :category_ids, Category.all, :id, :title %><br><br>
-   </section>
-   <p><strong>...and/or add a new one:</strong></p>
+
+  <p><strong>Select a category to this destination...</strong></p>
+    <%= f.collection_check_boxes :category_ids, categories, :id, :title %><br><br>
+  <p><strong>...and/or add a new one:</strong></p>
 
    <%= f.label :category %>
    <%= f.fields_for :categories, destination.categories.build do |c| %>
