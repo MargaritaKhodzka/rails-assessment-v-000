@@ -55,3 +55,4 @@ gem 'omniauth-facebook'
 gem 'dotenv-rails'
 gem 'devise', '~> 4.2.0'
 gem "twitter-bootstrap-rails"
+gem 'active_model_serializers'
