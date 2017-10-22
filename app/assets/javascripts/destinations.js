@@ -3,7 +3,7 @@
 $(() => {
   let path = $(location).attr('href')
   $.getJSON(path, function (data) {
-    if (data.items.length > 0) {
+    if (data.categories.length > 0) {
       let categoryList = $()
       data.categories.forEach(function (category) {
         categoryList = categoryList.add(`<a href='/categories/${category['id']}'>${category['title']}</a>

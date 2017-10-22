@@ -1,4 +1,4 @@
-<h1><%= @destination.name.upcase %></h1>
+<h2><%= @destination.name.upcase %></h2>
 
 <p><b>Description:</b> <%= @destination.description %></p>
 <p><b>Country:</b> <%= @destination.country %></p>
@@ -10,20 +10,9 @@
   <p><strong>You have not visited this destination yet.</strong></p>
 <% end %>
 
-<h2>Destination categories:</h2>
-<% if @destination.categories.nil? %>
-  <p>You haven't added any categories yet.</p>
-  <%= button_to 'Add a category', new_destination_category_path(@destination), class: 'btn btn-primary', method: :get %>
-<% else %>
-  <ul>
-    <% @destination.categories.each do |category| %>
-      <%= link_to category.title, destination_category_path(@destination, category) %>
-      <li><b>Climate:</b> <%= category.climate %></li>
-      <li><b>Must have items:</b> <%= category.must_have_items %></li>
-    <% end %>
-  </ul>
-  <%= button_to 'Add a category', new_destination_category_path(@destination), class: 'btn btn-primary', method: :get %>
-<% end %>
-<br><br>
+<h3>Destination categories:</h3>
+<div id="categories"></div>
+<div><%= button_to 'Add a category', new_destination_category_path(@destination), class: 'btn btn-primary', method: :get %></div>
+
 
 <%= link_to 'Edit', edit_destination_path(@destination) %> - <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you sure you want to delete this destination?" } %> - <%= link_to 'Back', destinations_path(@destination) %>
