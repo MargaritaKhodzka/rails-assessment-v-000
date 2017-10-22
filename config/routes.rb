@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   end
 
   root 'welcome#home'
-  get 'visited', to: 'welcome#visited'
+  get '/visited_destinations', to: 'users#user_visited'
 
 end

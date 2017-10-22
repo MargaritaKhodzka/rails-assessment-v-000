@@ -5,9 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :user_destinations
-  has_many :destinations, through: :user_destinations
-
+  has_many :destinations
   has_many :categories, through: :destinations
 
   validates :email, presence: true
@@ -22,10 +20,6 @@ class User < ApplicationRecord
     end
   end
 
-  def visited_destinations
-    self.destinations.select do |destination|
-      destination.visited == true
-    end
-  end
+
 
 end

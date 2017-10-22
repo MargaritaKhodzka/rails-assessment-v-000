@@ -1,6 +1,5 @@
 class Destination < ApplicationRecord
-  has_many :user_destinations
-  has_many :users, through: :user_destinations
+  belongs_to :user
 
   has_many :destination_categories
   has_many :categories, through: :destination_categories
@@ -15,9 +14,8 @@ class Destination < ApplicationRecord
      end
    end
 
-   def user_id=(user_id)
-     user = User.find_by(id: user_id)
-     self.user_destinations.build(user: user)
+   def self.visited_destinations
+     self.all.collect {|destination| destination if destination.visited}
    end
 
 end

@@ -1,58 +1,60 @@
 <%= render 'layouts/form_messages', object: destination %>
 <%= form_for destination do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :user_id %>
 
   <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" %>
+   <%= f.label :name %>
+   <%= f.text_field :name, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :description %>
-    <%= f.text_area :description, class: "form-control" %>
+   <%= f.label :description %>
+   <%= f.text_area :description, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :coutry %>
-    <%= f.text_field :country, class: "form-control" %>
+   <%= f.label :coutry %>
+   <%= f.text_field :country, class: "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :best_season_to_visit %>
-    <%= f.text_field :best_season_to_visit, class: "form-control" %>
+   <%= f.label :best_season_to_visit %>
+   <%= f.text_field :best_season_to_visit, class: "form-control" %>
   </div>
 
   <div class="form-check">
     <%= f.check_box :visited, class: "form-check-input" %>
     <%= label :visited, "Check box if you visited this destination." %>
   </div>
-
   <br><br>
-  <section>
-  <p><strong>Select a category to this destination...</strong></p>
-    <%= f.collection_check_boxes :category_ids, Category.all, :id, :title %><br><br>
-  </section>
-  <p><strong>...or add a new one:</strong></p>
-  <%= f.label :category %>
-  <%= f.fields_for :categories, destination.categories.build do |c| %>
-    <div class="form-check">
-      <%= c.label :title %>
-      <%= c.text_field :title, class: "form-control" %>
-    </div>
 
-    <div class="form-check">
-      <%= c.label :climate %>
-      <%= c.text_field :climate, class: "form-control" %>
-    </div>
+   <section>
+   <p><strong>Select a category to this destination...</strong></p>
+     <%= f.collection_check_boxes :category_ids, Category.all, :id, :title %><br><br>
+   </section>
+   <p><strong>...and/or add a new one:</strong></p>
 
-    <div class="form-check">
-      <%= c.label :must_have_items %>
-      <%= c.text_field :must_have_items, class: "form-control" %>
-    </div>
-  <% end %>
-  <br>
+   <%= f.label :category %>
+   <%= f.fields_for :categories, destination.categories.build do |c| %>
 
-    <%= f.submit class: 'btn btn-primary' %>
-  <% end %>
+     <div class="form-check">
+       <%= c.label :title %>
+       <%= c.text_field :title, class: "form-control" %>
+     </div>
+
+     <div class="form-check">
+       <%= c.label :climate %>
+       <%= c.text_field :climate, class: "form-control" %>
+     </div>
+
+     <div class="form-check">
+       <%= c.label :must_have_items %>
+       <%= c.text_field :must_have_items, class: "form-control" %>
+     </div>
+   <% end %>
+   <br>
+
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
 <br>
 <%= link_to "Back", destinations_path %>

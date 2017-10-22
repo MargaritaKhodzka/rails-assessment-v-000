@@ -1,9 +1,8 @@
 <h1>All categories:</h1>
 
 <% if @categories %>
-  <% @categories.each do |category| %>
-    <li><strong><%= link_to category.title, category_path(category) %></strong></li>
-  <% end %>
+  <%= render(@categories) %>
+  <div><%= button_to 'Add More Categories', new_destination_category_path, class: 'btn btn-primary', method: :get if @destination %></div>
 <% else %>
   <h3>You don't have any categories yet</h3>
 <% end %>

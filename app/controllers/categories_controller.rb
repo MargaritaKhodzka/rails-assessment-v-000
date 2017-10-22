@@ -4,7 +4,11 @@ class CategoriesController < ApplicationController
   before_action :current_category, only: %i[show edit update destroy]
 
   def index
-    @categories = Category.all
+    if params[:destination_id]
+      @categories = @destination.categories
+    else
+      @categories = current_user.try(:categories)
+    end
   end
 
   def new

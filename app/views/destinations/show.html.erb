@@ -1,10 +1,10 @@
 <h1><%= @destination.name.upcase %></h1>
 
-<p>Description: <%= @destination.description %></p>
-<p>Country: <%= @destination.country %></p>
-<p>Best season to visit: <%= @destination.best_season_to_visit %></p>
+<p><b>Description:</b> <%= @destination.description %></p>
+<p><b>Country:</b> <%= @destination.country %></p>
+<p><b>Best season to visit:</b> <%= @destination.best_season_to_visit %></p>
 
-<% if current_user.visited_destinations.include?(@destination) %>
+<% if @destination.visited %>
   <p><strong>You visited this destination!</strong></p>
 <% else %>
   <p><strong>You have not visited this destination yet.</strong></p>
@@ -17,9 +17,9 @@
 <% else %>
   <ul>
     <% @destination.categories.each do |category| %>
-      <li><%= link_to category.title, destination_category_path(@destination, category) %></li>
-      <p>Climate: <%= category.climate %></p>
-      <p>Must have items: <%= category.must_have_items %></p>
+      <%= link_to category.title, destination_category_path(@destination, category) %>
+      <li><b>Climate:</b> <%= category.climate %></li>
+      <li><b>Must have items:</b> <%= category.must_have_items %></li>
     <% end %>
   </ul>
   <%= button_to 'Add a category', new_destination_category_path(@destination), class: 'btn btn-primary', method: :get %>

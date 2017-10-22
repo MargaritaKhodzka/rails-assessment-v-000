@@ -4,8 +4,4 @@ class WelcomeController < ApplicationController
   def home
   end
 
-  def visited
-    @visited = current_user.visited_destinations
-  end
-
 end
