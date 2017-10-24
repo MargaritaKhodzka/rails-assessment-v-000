@@ -1,8 +1,11 @@
-<h1><%= @category.title %> category</h1>
-<p>Climate: <%= @category.climate %></p>
-<p>Must Have Items: <%= @category.must_have_items %></p>
+<a href="#" class="js-next" data-id="<%= @category.id %>">Next Category</a>
+<h1 id="title"><%= @category.title %></h1>
+<p id="climate">Climate: <%= @category.climate %></p>
+<p id="must_have_items">Must Have Items: <%= @category.must_have_items %></p>
 
 <h3>See destinations in this category:</h3>
+<div id="seeIn"></div>
+
 <ul><%= render(@destinations) %></ul>
 <%= javascript_include_tag "categories" %>
 
