@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     @category.destination_ids = params[:destination_id]
     if @category.save
-      redirect_to @category
+      render json: @category, status: 201
     else
       render :new
     end

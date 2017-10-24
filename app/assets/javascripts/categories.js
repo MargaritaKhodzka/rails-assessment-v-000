@@ -8,6 +8,17 @@ $(() => {
       return e.id
     })
   })
+
+  $('form').submit(function (e) {
+    e.preventDefault()
+    let values = $(this).serialize()
+    let posting = $.post('/categories', values)
+    posting.done(function (data) {
+      $('#title').html(`${data['title']}`)
+      $('#climate').html(`Climate: ${data['climate']}`)
+      $('#must_have_items').html(`Must Have Items: ${data['must_have_items']}`)
+    })
+  })
 })
 
 $('js-next').on('click', function () {
