@@ -4,11 +4,7 @@ class CategoriesController < ApplicationController
   before_action :current_category, only: %i[show edit update destroy]
 
   def index
-    @categories = current_user.categories
-    respond_to do |f|
-      f.html { render :index }
-      f.json { render json: @categories }
-    end
+    @categories = Category.all
   end
 
   def new
@@ -19,7 +15,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     @category.destination_ids = params[:destination_id]
     if @category.save
-      render json: @category, status: 201
+      redirect_to @category
     else
       render :new
     end
@@ -27,10 +23,6 @@ class CategoriesController < ApplicationController
 
   def show
     @destinations = @category.destinations
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @category}
-    end
   end
 
   def edit
