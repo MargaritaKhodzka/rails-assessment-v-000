@@ -6,4 +6,6 @@
 
 <ul><%= render(@destinations) %></ul>
 
+<%= javascript_include_tag "categories" %>
+
 <%= link_to 'Edit', edit_category_path(@category) %> - <%= link_to 'Delete', category_path(@category), method: :delete, data: { confirm: 'Are you sure you want to delete this category?' } %> - <%= link_to 'Back', categories_path(@category) %>

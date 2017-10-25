@@ -23,6 +23,10 @@ class CategoriesController < ApplicationController
 
   def show
     @destinations = @category.destinations
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @category }
+    end
   end
 
   def edit

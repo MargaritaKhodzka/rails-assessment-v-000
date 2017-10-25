@@ -28,7 +28,10 @@ class DestinationsController < ApplicationController
   def show
     if current_destination
       @categories = @destination.categories
-      render :show
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: @destination }
+      end
     else
       redirect_to destinations_path
     end

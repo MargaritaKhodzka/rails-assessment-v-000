@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
+// require destinations
+// require categories
