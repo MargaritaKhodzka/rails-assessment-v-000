@@ -1,8 +1,9 @@
-<h2><%= @destination.name.upcase %></h2>
+<a href="#" class="js-next" data-id="<%=@destination.id%>">Next Destination</a>
 
-<p><b>Description:</b> <%= @destination.description %></p>
-<p><b>Country:</b> <%= @destination.country %></p>
-<p><b>Best season to visit:</b> <%= @destination.best_season_to_visit %></p>
+<h2 id="name"><%= @destination.name.upcase %></h2>
+<p id="description">Description: <%= @destination.description %></p>
+<p id="country">Country: <%= @destination.country %></p>
+<p id="best_season_to_visit">Best season to visit: <%= @destination.best_season_to_visit %></p>
 
 <% if @destination.visited %>
   <p><strong>You visited this destination!</strong></p>
