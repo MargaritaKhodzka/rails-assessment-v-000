@@ -6,11 +6,12 @@ $(() => {
     if (data.categories.length > 0) {
       let categoryList = $()
       data.categories.forEach(function (category) {
-        categoryList = categoryList.add(`<a href='/categories/${category['id']}'>${category['title']}</a>
-        <ul>
-          <li>Climate: ${category['climate']}</li>
-          <li>Must have items: ${category['must_have_items']}</li>
-        </ul>`)
+        categoryList = categoryList.add
+        (`<li><strong><a href='/categories/${category['id']}'>${category['title']}</a></strong></li>
+          <ul>
+            <li>Climate: ${category['climate']}</li>
+            <li>Must have items: ${category['must_have_items']}</li>
+          </ul>`)
       })
       $('#categories').html(categoryList)
     } else {

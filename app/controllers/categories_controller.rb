@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   before_action :current_category, only: %i[show edit update destroy]
 
   def index
-    @categories = current_user.try(:categories)
+    @categories = current_user.categories
     respond_to do |f|
       f.html { render :index }
       f.json { render json: @categories }
@@ -27,9 +27,9 @@ class CategoriesController < ApplicationController
 
   def show
     @destinations = @category.destinations
-    respond_to do |f|
-      f.html { render :show }
-      f.json { render json: @category }
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @category}
     end
   end
 

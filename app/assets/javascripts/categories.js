@@ -3,7 +3,7 @@
 let categoriesValues
 
 $(() => {
-  $.getJSON('/items.json', function (data) {
+  $.getJSON('/categories.json', function (data) {
     categoriesValues = $.map(data, function (e) {
       return e.id
     })
@@ -21,13 +21,13 @@ $(() => {
   })
 })
 
-$('js-next').on('click', function () {
+$('.js-next').on('click', function () {
   let nextIndex
   let dataIdIndex = categoriesValues.indexOf(parseInt($('.js-next').attr('data-id')))
   if (dataIdIndex === categoriesValues.length - 1)
     nextIndex = 0
   else
-    nextIndex - dataIdIndex + 1
+    nextIndex = dataIdIndex + 1
 
   $.getJSON('/categories/' + categoriesValues[nextIndex], function(data) {
     $('#title').html(`${data['title']}`)

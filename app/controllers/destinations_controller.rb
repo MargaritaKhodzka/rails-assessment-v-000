@@ -13,7 +13,7 @@ class DestinationsController < ApplicationController
   end
 
   def create
-    @destination = current_user.destinations.build(destination_params)
+    @destination = Destination.new(destination_params)
     if @destination.save
       redirect_to @destination
     else
