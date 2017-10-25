@@ -30,7 +30,7 @@
 
 
   <p><strong>Select a category to this destination...</strong></p>
-    <%= f.collection_check_boxes :category_ids, categories, :id, :title %><br><br>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :title %><br><br>
   <p><strong>...and/or add a new one:</strong></p>
 
    <%= f.label :category %>
