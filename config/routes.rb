@@ -14,5 +14,6 @@ Rails.application.routes.draw do
 
   root 'welcome#home'
   get '/visited_destinations', to: 'users#user_visited'
+  get '/destinations/:id/description', to: 'destinations#description'
 
 end

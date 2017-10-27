@@ -5,6 +5,15 @@ class DestinationsController < ApplicationController
 
   def index
     @destinations = current_user.destinations
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @destinations }
+    end
+  end
+
+  def description
+    destination = Destination.find(params[:id])
+    render plain: destination.description
   end
 
   def new
@@ -15,7 +24,7 @@ class DestinationsController < ApplicationController
   def create
     @destination = Destination.new(destination_params)
     if @destination.save
-      redirect_to @destination
+      render json: @destination, status: 201
     else
       render :new
     end

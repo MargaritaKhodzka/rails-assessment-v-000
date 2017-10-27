@@ -1,7 +1,9 @@
-<h2><%= @destination.name.upcase %></h2>
-<p>Description: <%= @destination.description %></p>
-<p>Country: <%= @destination.country %></p>
-<p>Best season to visit: <%= @destination.best_season_to_visit %></p>
+<a href="#" class="js-next" data-id="<%= @destination.id %>">Next Destination</a>
+
+<h2 class="name"><%= @destination.name %></h2>
+<p class="description">Description: <%= @destination.description %></p>
+<p class="country">Country: <%= @destination.country %></p>
+<p class="best_season_to_visit">Best season to visit: <%= @destination.best_season_to_visit %></p>
 
 <% if @destination.visited %>
   <p><strong>You visited this destination!</strong></p>
@@ -10,12 +12,10 @@
 <% end %>
 
 <h3>Destination categories:</h3>
-
 <div id="categories"></div>
-
 <%= button_to 'Add a category', new_destination_category_path(@destination), class: 'btn btn-primary', method: :get %>
-
-<%= javascript_include_tag "destinations" %>
 <br><br>
 
-<%= link_to 'Edit', edit_destination_path(@destination) %> - <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you sure you want to delete this destination?" } %> - <%= link_to 'Back', destinations_path(@destination) %>
+<%= link_to 'Edit', edit_destination_path(@destination) %> - <%= link_to 'Delete', destination_path(@destination), method: :delete, data: { confirm: "Are you sure you want to delete this destination?" } %>
+
+<%= javascript_include_tag "destinations" %>

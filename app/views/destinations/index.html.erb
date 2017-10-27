@@ -3,7 +3,9 @@
 <% if @destinations %>
   <ul>
     <% @destinations.each do |destination| %>
-    <li><%= link_to destination.name, destination_path(destination) %> - <%= link_to 'Edit', edit_destination_path(destination) %></li>
+      <%= render partial: "destination", locals: {destination: destination} %>
+      <div id="destination-<%= destination.id %>"><%= truncate(destination.description) %></div>
+      <button class="js-more" data-id="<%= destination.id %>">See more</button>
     <% end %>
   </ul>
   <%= button_to 'Add a destination', new_destination_path, class: 'btn btn-primary', method: :get %>

@@ -17,16 +17,15 @@ $(function () {
     var nextId = parseInt($(".js-next").attr("data-id")) + 1
     $.get('/categories/' + nextId + ".json", function (data) {
       var category = new Category(data.id, data.title, data.climate, data.must_have_items, data.destinations)
-
+      $('.destinations').html('')
       category.formatShow()
       $(".js-next").attr("data-id", category.id)
-      // $('.destinations').append(`<li><a href="#">Destination 1</a></li>`)
-      // $('.destinations').append(`<li><a href="#">Destination 2</a></li>`)
-      $('.destinations').html('')
-      let destinations = []
-      for(let i = 0; i <= category.length - 1; i++) {
-      destinations.append(`<li>${data[i].destinations}<li>`)
-      }
+
+      let destinationList = $()
+      data.destinations.forEach(function (destination) {
+        destinationList = destinationList.add(`<li><a href='/destinations/${destination['id']}'>${destination['name']}</a>`)
+      })
+      $('#destinations').html(destinationList)
     })
   })
 })
