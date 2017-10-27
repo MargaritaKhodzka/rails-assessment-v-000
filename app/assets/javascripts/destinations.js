@@ -16,8 +16,8 @@ $(function () {
 $(function () {
   $(".js-more").on('click', function() {
     var id = $(this).data("id")
-    $.get("/destinations/" + id + "/description", function(description) {
-      var descriptionText = "<p>" + description + "</p>"
+    $.get("/destinations/" + id + ".json", function(data) {
+      var descriptionText = "<p>" + data["description"] + "</p>"
         $("#destination-" + id).html(descriptionText)
     })
   })

@@ -11,11 +11,6 @@ class DestinationsController < ApplicationController
     end
   end
 
-  def description
-    destination = Destination.find(params[:id])
-    render plain: destination.description
-  end
-
   def new
     @destination = Destination.new(user_id: current_user.id)
     @destination.categories.build
