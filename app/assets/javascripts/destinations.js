@@ -15,6 +15,7 @@ $(function () {
 
 $(function () {
   $(".js-more").on('click', function() {
+    debugger
     var id = $(this).data("id")
     $.get("/destinations/" + id + ".json", function(data) {
       var descriptionText = "<p>" + data["description"] + "</p>"
