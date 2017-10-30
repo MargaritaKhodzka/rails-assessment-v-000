@@ -63,3 +63,12 @@ Destination.prototype.formatShow = function() {
   $('.best_season_to_visit').text(`Best season to visit: ${this.best_season_to_visit}`)
   $('.visited').text(`${this.visited}`)
 }
+
+$(function() {
+  $("new_category").on("submit", function(e) {
+    alert("You clicked submit")
+    url = this.action
+    console.log(url)
+    e.preventDefault()
+  })
+})
