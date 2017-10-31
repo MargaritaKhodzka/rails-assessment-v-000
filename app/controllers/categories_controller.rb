@@ -12,16 +12,16 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @category = @destination.categories.build
+
   end
 
   def create
     @category = @destination.categories.build(category_params)
     @category.destination_ids = params[:destination_id]
     if @category.save
-      render json: @category, status: 201
+      render 'create.js', :layout => false
     else
-      render :new
+      render "posts/show"
     end
   end
 
@@ -57,12 +57,12 @@ class CategoriesController < ApplicationController
 
   private
 
-  def category_params
-    params.require(:category).permit(:title, :climate, :must_have_items)
-  end
-
   def find_destination
     @destination = Destination.find_by(id: params[:destination_id])
+  end
+
+  def category_params
+    params.require(:category).permit(:title, :climate, :must_have_items)
   end
 
   def current_category

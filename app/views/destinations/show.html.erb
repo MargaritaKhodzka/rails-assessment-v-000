@@ -14,21 +14,11 @@
 <h3>Destination categories:</h3>
 
 <div id="categories">
-  <% @destination.categories.each do |category| %>
-      <li><%= link_to category.title, destination_category_path(@destination, category) %></li>
-      <ul>
-        <li>Climate: <%= category.climate %></li>
-        <li>Must have items: <%= category.must_have_items %></li>
-      </ul>
-    <% end %>
+  <%= render 'categories/categories' %>
 </div>
 
-<%= form_for @category do |f| %>
-  <label>Add a new category to this destination:</label>
+<%= form_for([@destination, @category], :remote => true) do |f|  %>
   <%= f.text_field :title %>
-  <span id= "destination-field">
-    <%= f.hidden_field :destination_id, value: @destination.id %>
-  </span>
   <p><%= f.submit %></p>
 <% end %>
 

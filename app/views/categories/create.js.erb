@@ -1,0 +1,3 @@
+$("#category_title").val("")
+var $ul = $("div#categories ul")
+$ul.append("<%= j(render('categories/category', :category => @category)) %>")
