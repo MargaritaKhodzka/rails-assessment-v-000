@@ -34,7 +34,11 @@ $(function () {
       $(".js-next").attr("data-id", destination.id)
       let categoryList = $()
       data.categories.forEach(function (category) {
-        categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a>`)
+        categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a>
+          <ul>
+              <li>Climate: ${category['climate']}</li>
+              <li>Must Have Items: ${category['must_have_items']}</li>
+          </ul>`)
       })
       $('#categories').html(categoryList)
     })
