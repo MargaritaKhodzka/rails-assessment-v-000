@@ -18,9 +18,4 @@ class Destination < ApplicationRecord
      self.all.collect {|destination| destination if destination.visited}
    end
 
-  #  def next_id
-  #    Destination.where("id > ?", self.id).first.id
-  #   #  binding.pry
-  #  end
-
 end

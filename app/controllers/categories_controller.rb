@@ -19,9 +19,9 @@ class CategoriesController < ApplicationController
     @category = @destination.categories.build(category_params)
     @category.destination_ids = params[:destination_id]
     if @category.save
-      render json: @destination, status: 201
+      render json: @category, status: 201
     else
-      render 'destinations/show'
+      render :new
     end
   end
 

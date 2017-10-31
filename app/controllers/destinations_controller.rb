@@ -28,7 +28,6 @@ class DestinationsController < ApplicationController
   def show
     if current_destination
       @categories = @destination.categories
-      @category = Category.new
       respond_to do |format|
         format.html { render :show }
         format.json { render json: @destination }

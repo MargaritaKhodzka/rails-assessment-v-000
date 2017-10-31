@@ -3,7 +3,11 @@
 <ul>
   <% if @categories %>
     <% @categories.each do |category| %>
-    <li><strong><%= link_to category.title, category_path(category) %></strong></li>
+      <li><%= link_to category.title, category_path(category) %></li>
+      <ul>
+        <li>Climate: <%= category.climate %></li>
+        <li>Must have items: <%= category.must_have_items %></li>
+      </ul>
     <% end %>
   <% else %>
     <h3>You don't have any categories yet</h3>

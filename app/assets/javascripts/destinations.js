@@ -15,7 +15,6 @@ $(function () {
 
 $(function () {
   $(".js-more").on('click', function() {
-    debugger
     var id = $(this).data("id")
     $.get("/destinations/" + id + ".json", function(data) {
       var descriptionText = "<p>" + data["description"] + "</p>"
@@ -63,13 +62,7 @@ Destination.prototype.formatShow = function() {
   $('.country').text(`Country: ${this.country}`)
   $('.best_season_to_visit').text(`Best season to visit: ${this.best_season_to_visit}`)
   $('.visited').text(`${this.visited}`)
+  $(".add-category").html(`<a href="/destinations/${this.id}/categories/new">Add a new category to this destination</a>`)
+  $(".edit-link").html(`<a href="/destinations/${this.id}/edit">Edit</a>`)
+  $(".delete-link").html(`<a href="/destinations/${this.id}/destroy">Delete</a>`)
 }
-
-$(function() {
-  $("new_category").on("submit", function(e) {
-    alert("You clicked submit")
-    url = this.action
-    console.log(url)
-    e.preventDefault()
-  })
-})
