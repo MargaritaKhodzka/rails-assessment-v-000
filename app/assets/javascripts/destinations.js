@@ -32,14 +32,13 @@ $(function () {
       $('.categories').html('')
     destination.formatShow()
       $(".js-next").attr("data-id", destination.id)
-
       let categoryList = $()
       data.categories.forEach(function (category) {
         categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a>
-            <ul>
-                <li>Climate: ${category['climate']}</li>
-                <li>Must Have Items: ${category['must_have_items']}</li>
-            </ul>`)
+          <ul>
+              <li>Climate: ${category['climate']}</li>
+              <li>Must Have Items: ${category['must_have_items']}</li>
+          </ul>`)
       })
       $('#categories').html(categoryList)
     })
@@ -65,4 +64,28 @@ Destination.prototype.formatShow = function() {
   $(".add-category").html(`<a href="/destinations/${this.id}/categories/new">Add a new category to this destination</a>`)
   $(".edit-link").html(`<a href="/destinations/${this.id}/edit">Edit</a>`)
   $(".delete-link").html(`<a href="/destinations/${this.id}/destroy">Delete</a>`)
+}
+
+function createNewCategory(e){
+  var values= $(e).serialize()
+  var posting = $.post('/categories', values)
+  posting.done(function(category) {
+    var newCategory = new Category(category.id, category.climate, category.must_have_items, category.destination)
+    var createdCategory = newCategory.formatCategory() + " <button class='delete-Category' data='" + category.id + "' onclick='deleteCategory(this)'>Delete</button></li>"
+    $("#categories").append(createdCategory)
+    $("#submit").prop( "disabled", false )
+    $("#category_title").val("")
+  })
+}
+
+function Category (id, title, climate, must_have_items, destinations) {
+  this.id = id
+  this.title = title
+  this.climate = climate
+  this.must_have_items = must_have_items
+  this.destinations = destinations
+}
+
+Category.prototype.formatCategory = function(){
+  return "<li id='category-"+ this.id +"'>" + this.title
 }
