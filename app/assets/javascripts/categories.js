@@ -23,7 +23,7 @@ $(function () {
 
       let destinationList = $()
       data.destinations.forEach(function (destination) {
-        destinationList = destinationList.add(`<li><a href='/destinations/${destination['id']}'>${destination['name']}</a>`)
+        destinationList = destinationList.add(`<ul><li><a href='/destinations/${destination['id']}'>${destination['name']}</a></li></ul>`)
       })
       $('#destinations').html(destinationList)
     })
@@ -42,4 +42,6 @@ Category.prototype.formatShow = function() {
   $('.title').text(`${this.title} category`)
   $('.climate').text(`Climate: ${this.climate}`)
   $('.must_have_items').text(`Must Have Items: ${this.must_have_items}`)
+  $(".edit-link").html(`<a href="/categories/${this.id}/edit">Edit</a>`)
+  $(".delete-link").html(`<a href="/categories/${this.id}/destroy">Delete</a>`)
 }

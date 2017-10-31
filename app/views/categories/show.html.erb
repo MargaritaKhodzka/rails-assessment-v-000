@@ -10,6 +10,12 @@
   </div>
 <br><br>
 
-<%= link_to 'Edit', edit_category_path(@category) %> - <%= link_to 'Delete', category_path(@category), method: :delete, data: { confirm: 'Are you sure you want to delete this category?' } %>
+<div class="edit-link">
+  <%= link_to "Edit", edit_category_path(@category) %>
+</div>
+
+<div class="delete-link">
+  <%= link_to "Delete", category_path(@category), method: :delete, data: { confirm: 'Are you sure you want to delete this category?' } %>
+</div>
 
 <%= javascript_include_tag "categories" %>
