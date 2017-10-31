@@ -35,7 +35,7 @@ $(function () {
 
       let categoryList = $()
       data.categories.forEach(function (category) {
-        categoryList = categoryList.add(`<li><strong><a href='/categories/${category['id']}'>${category['title']}</a></strong>
+        categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a>
             <ul>
                 <li>Climate: ${category['climate']}</li>
                 <li>Must Have Items: ${category['must_have_items']}</li>
