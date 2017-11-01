@@ -6,7 +6,8 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :destinations
-  has_many :categories, through: :destinations
+  has_many :notes
+  has_many :visited, dependent: :destroy
 
   validates :email, presence: true
   validates :email, uniqueness: true

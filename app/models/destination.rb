@@ -6,6 +6,8 @@ class Destination < ApplicationRecord
 
   has_many :visited, dependent: :destroy
 
+  has_many :notes
+
   validates :name, uniqueness: { case_sensitive: false }
   validates :description, length: { maximum: 500, too_long: "%{count} characters is the maximum allowed" }
 
