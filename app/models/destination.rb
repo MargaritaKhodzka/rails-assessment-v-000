@@ -4,6 +4,8 @@ class Destination < ApplicationRecord
   has_many :destination_categories
   has_many :categories, through: :destination_categories
 
+  has_many :visited, dependent: :destroy
+
   validates :name, uniqueness: { case_sensitive: false }
   validates :description, length: { maximum: 500, too_long: "%{count} characters is the maximum allowed" }
 
@@ -12,10 +14,6 @@ class Destination < ApplicationRecord
        category = Category.find_or_create_by(category_attribute)
        categories << category if category.persisted?
      end
-   end
-
-   def self.visited_destinations
-     self.all.collect {|destination| destination if destination.visited}
    end
 
 end

@@ -13,6 +13,5 @@ Rails.application.routes.draw do
   end
 
   root 'destinations#index'
-  get '/visited_destinations', to: 'users#user_visited'
 
 end
