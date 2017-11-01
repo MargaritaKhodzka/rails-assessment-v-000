@@ -1,0 +1,10 @@
+<div>
+  <h4><strong>Add a note:</strong></h4>
+
+  <%= form_for([@destination, @destination.notes.build]) do |f| %>
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+    <br>
+    <p><%= f.submit data: { disable_with: false } %></p>
+  <% end %>
+</div>

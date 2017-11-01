@@ -11,3 +11,10 @@
 <%= link_to "Back", root_path, class: "btn btn-default" %>
 <%= link_to "Edit", edit_destination_path, class: "btn btn-default" %>
 <%= link_to "Delete", destination_path, method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-default" %>
+
+<div class="notes-body">
+  <ol><%= render @destination.notes %></ol>
+</div>
+<div>
+  <%= render partial: 'notes/form', locals: { note: @note }%>
+</div>

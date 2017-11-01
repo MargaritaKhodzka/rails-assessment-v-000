@@ -1,0 +1,7 @@
+<div id="comment_<%= comment.id %>">
+  <p><%=note.user.email%>:</p>
+  <p><%= note.content %></p>
+
+  <%= button_to(destination_note_path(@destination.id, note.id), {method: :delete, class:"btn btn-danger delete-note-button pull-right",id:"note_#{note.id}", params:{id: note.id, destination: @destination.id}, data: {destination: @destination.id, note: note.id}} ) do %>
+  <% end %>
+</div>
