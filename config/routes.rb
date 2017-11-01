@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :destinations do
-    resources :categories, only: %i[index create new edit show]
+    resources :categories
   end
 
   resources :categories
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
 
   root 'welcome#home'
+  
   get '/visited_destinations', to: 'users#user_visited'
 
 end

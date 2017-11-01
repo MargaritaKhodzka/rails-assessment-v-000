@@ -46,7 +46,6 @@ $(function () {
   })
 })
 
-
 function Destination (id, name, description, country, best_season_to_visit, visited, categories) {
   this.id = id
   this.name = name
