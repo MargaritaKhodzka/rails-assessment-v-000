@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_destination, only: %i[index new create]
-  before_action :current_category, only: %i[show edit update destroy]
+  before_action :find_destination
+  before_action :current_category
 
   def index
     @categories = Category.all
@@ -12,14 +12,14 @@ class CategoriesController < ApplicationController
   end
 
   def new
-
+    @category = Category.new
   end
 
   def create
     @category = @destination.categories.build(category_params)
     @category.destination_ids = params[:destination_id]
     if @category.save
-      render 'create.js', :layout => false
+      render 'categories/show', :layout => false
     else
       render "posts/show"
     end
