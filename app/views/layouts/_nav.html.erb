@@ -5,8 +5,6 @@
         <a class="navbar-brand" href="#">Welcome, <%= current_user.email %></a>
         <ul class="nav navbar-nav">
           <li><%= link_to "My Destinations", destinations_path, class: "nav-link" %></li>
-          <li><%= link_to "My Categories", categories_path, class: "nav-link" %></li>
-          <li><%= link_to "Destinations I have visited", visited_destinations_path, class: "nav-link" %></li>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "nav-link" %></li>
         </ul>
     </div>

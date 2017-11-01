@@ -1,36 +1,13 @@
-<a href="#" class="js-next" data-id="<%= @destination.id %>">Next Destination</a>
-
-<h2 class="name"><%= @destination.name %></h2>
-<p class="description">Description: <%= @destination.description %></p>
-<p class="country">Country: <%= @destination.country %></p>
-<p class="best_season_to_visit">Best season to visit: <%= @destination.best_season_to_visit %></p>
-
-<% if @destination.visited %>
-  <p><strong>You visited this destination!</strong></p>
-<% else %>
-  <p><strong>You have not visited this destination yet.</strong></p>
-<% end %>
-
-<h3>Destination categories:</h3>
-
-<div id="categories">
-  <%= render 'categories/categories' %>
-</div>
-
-<h4>Add a new category to this destination:</h4>
-
-  <%= form_for([@destination, @category], :remote => true) do |f|  %>
-    <%= f.label :title, 'Title' %>
-    <%= f.text_field :title %><br>
-    <p><%= f.submit %></p>
+<p><%= @destination.name %></p>
+<p><%= @destination.description %></p>
+<p><%= @destination.country %></p>
+<p><%= @destination.best_season_to_visit %></p>
+<ol>
+  <% @destination.categories.each do |destination_category| %>
+    <li><%= destination_category.title %></li>
   <% end %>
+</ol>
 
-<%= javascript_include_tag "destinations" %>
-
-<div class="edit-link">
-  <%= link_to "Edit", edit_destination_path(@destination) %>
-</div>
-
-<div class="delete-link">
-  <%= link_to "Delete", destination_path(@destination), method: :delete, data: { confirm: "Are you sure you want to delete this destination?" } %>
-</div>
+<%= link_to "Back", root_path, class: "btn btn-default" %>
+<%= link_to "Edit", edit_destination_path, class: "btn btn-default" %>
+<%= link_to "Delete", destination_path, method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-default" %>

@@ -22,38 +22,53 @@
    <%= f.text_field :best_season_to_visit, class: "form-control" %>
   </div>
 
-  <div class="form-check">
-    <%= f.check_box :visited, class: "form-check-input" %>
-    <%= label :visited, "Check box if you visited this destination." %>
+  <div>
+
+
+    <%= f.fields_for :categories, destination.categories.build do |c| %>
+      <div class="form-check">
+        <%= c.label :title %>
+        <%= c.text_field :title, class: "form-control" %>
+      </div>
+
+      <div class="form-check">
+        <%= c.label :climate %>
+        <%= c.text_field :climate, class: "form-control" %>
+      </div>
+
+      <div class="form-check">
+        <%= c.label :must_have_items %>
+        <%= c.text_field :must_have_items, class: "form-control" %>
+      </div>
+  <% end %>
+
+    <h4>Select Existing Category:</h4>
+      <%= f.collection_check_boxes :category_ids, Category.all, :id, :title %>
+
+      <input type="button" class="check" value="uncheck all"/>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('.check:button').toggle(function () {
+          $('input:checkbox').attr('checked', 'checked');
+          $(this).val('uncheck all')
+        }, function () {
+          $('input:checkbox').removeAttr('checked');
+          $(this).val('check all');
+        })
+      })
+    </script>
   </div>
-  <br><br>
 
+<% if params[:action] == "edit" %>
+  <%= f.submit " Edit Recipe", id:"submitButton"  %>
+<% else %>
+  <%= f.submit "Submit" %></br>
+<% end %>
 
-  <p><strong>Select a category to this destination...</strong></p>
-    <%= f.collection_check_boxes :category_ids, Category.all, :id, :title %><br><br>
-  <p><strong>...and/or add a new one:</strong></p>
+<%= link_to "Back", destination_path %>
 
-   <%= f.label :category %>
-   <%= f.fields_for :categories, destination.categories.build do |c| %>
-
-     <div class="form-check">
-       <%= c.label :title %>
-       <%= c.text_field :title, class: "form-control" %>
-     </div>
-
-     <div class="form-check">
-       <%= c.label :climate %>
-       <%= c.text_field :climate, class: "form-control" %>
-     </div>
-
-     <div class="form-check">
-       <%= c.label :must_have_items %>
-       <%= c.text_field :must_have_items, class: "form-control" %>
-     </div>
-   <% end %>
-   <br>
-
+<!--
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>
-<br>
-<%= link_to "Back", destinations_path %>
+<br> -->

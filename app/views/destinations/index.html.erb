@@ -1,15 +1,14 @@
 <h3>My destinations:</h3>
 
-<% if @destinations %>
   <ul>
     <% @destinations.each do |destination| %>
-      <%= render partial: "destination", locals: {destination: destination} %>
-      <div id="destination-<%= destination.id %>"><%= truncate(destination.description) %></div>
-      <button class="js-more" data-id="<%= destination.id %>">See more</button>
+      <li><%= link_to destination.name, destination_path(destination) %></li>
+      <% if current_user %>
+        <%= link_to destination_visited_index_path(destination_id: destination.id, user_id: current_user), method: :post do %>
+        <% end %>
+      <% end %>
     <% end %>
   </ul>
-  <%= button_to 'Add a destination', new_destination_path, class: 'btn btn-primary', method: :get %>
-<% else %>
-  <h3>You haven't added any destinations to your bucket list yet!</h3>
-  <%= button_to 'Add a destination', new_destination_path, class: 'btn btn-primary', method: :get %>
-<% end %>
+
+
+<%= button_to 'Add a destination', new_destination_path, class: 'btn btn-primary', method: :get %>
