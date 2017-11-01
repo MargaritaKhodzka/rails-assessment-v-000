@@ -23,30 +23,10 @@
   </div>
 
   <div>
+  <h4>Select Existing Category:</h4>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :title %>
 
-
-    <%= f.fields_for :categories, destination.categories.build do |c| %>
-      <div class="form-check">
-        <%= c.label :title %>
-        <%= c.text_field :title, class: "form-control" %>
-      </div>
-
-      <div class="form-check">
-        <%= c.label :climate %>
-        <%= c.text_field :climate, class: "form-control" %>
-      </div>
-
-      <div class="form-check">
-        <%= c.label :must_have_items %>
-        <%= c.text_field :must_have_items, class: "form-control" %>
-      </div>
-  <% end %>
-
-    <h4>Select Existing Category:</h4>
-      <%= f.collection_check_boxes :category_ids, Category.all, :id, :title %>
-
-      <input type="button" class="check" value="uncheck all"/>
-
+    <input type="button" class="check" value="uncheck all"></input>
     <script type="text/javascript">
       $(document).ready(function () {
         $('.check:button').toggle(function () {
@@ -60,15 +40,31 @@
     </script>
   </div>
 
+  <h4>And/or create a new one:</h4>
+  <%= f.fields_for :categories, destination.categories.build do |c| %>
+    <div class="form-check">
+      <%= c.label :title %>
+      <%= c.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="form-check">
+      <%= c.label :climate %>
+      <%= c.text_field :climate, class: "form-control" %>
+    </div>
+
+    <div class="form-check">
+      <%= c.label :must_have_items %>
+      <%= c.text_field :must_have_items, class: "form-control" %>
+    </div>
+  <% end %>
+
+
 <% if params[:action] == "edit" %>
-  <%= f.submit " Edit Recipe", id:"submitButton"  %>
+  <%= f.submit "Edit Recipe" %>
 <% else %>
-  <%= f.submit "Submit" %></br>
+  <%= f.submit class: 'btn btn-primary' %></br>
 <% end %>
 
-<%= link_to "Back", destination_path %>
+<%= link_to "Back", destinations_path %>
 
-<!--
-  <%= f.submit class: 'btn btn-primary' %>
 <% end %>
-<br> -->

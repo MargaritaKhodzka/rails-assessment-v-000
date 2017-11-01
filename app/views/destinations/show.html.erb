@@ -1,3 +1,5 @@
+<%= link_to("Next Destination", @destination.next) if @destination.next %>
+
 <p><%= @destination.name %></p>
 <p><%= @destination.description %></p>
 <p><%= @destination.country %></p>
@@ -12,7 +14,7 @@
 <%= link_to "Edit", edit_destination_path, class: "btn btn-default" %>
 <%= link_to "Delete", destination_path, method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-default" %>
 
-<div class="notes-body">
+<div class="notes-content">
   <ol><%= render @destination.notes %></ol>
 </div>
 <div>

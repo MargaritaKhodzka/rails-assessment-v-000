@@ -1,68 +1,69 @@
-$(document).ready(function() {
-  seeMore()
+$(function() {
+  bindClickHandlers()
 })
 
-function seeMore() {
-  $(".js-more").on('click', function() {
-    var id = $(this).data("id")
-    $.get("/destinations/" + id + ".json", function(data) {
-      var descriptionText = "<p>" + data["description"] + "</p>"
-        $("#destination-" + id).html(descriptionText)
-    })
-  })
-}
-
-$(function () {
-  $('form').submit(function (e) {
+const bindClickHandlers = () => {
+  $('.all_destinations').on('click', (e) => {
     e.preventDefault()
-    var values = $(this).serialize()
-    var posting = $.post('/destinations', values)
-    posting.done(function (data) {
-      $('#name').text(`${data['name']}`)
-      $('#description').text(`Description: ${data['description']}`)
-      $('#country').text(`Country: ${data['country']}`)
-      $('#best_season_to_visit').text(`Best season to visit: ${data['best_season_to_visit']}`)
-      $('#visited').text(`${data['visited']}`)
-    })
-  })
-})
-
-$(function () {
-  $(".js-next").on("click", function (e) {
-    e.preventDefault()
-    var nextId = parseInt($(".js-next").attr("data-id")) + 1
-    $.get('/destinations/' + nextId + ".json", function (data) {
-      var destination = new Destination(data.id, data.name, data.description, data.country, data.best_season_to_visit, data.visited, data.categories)
-      $('.categories').html('')
-    destination.formatShow()
-      $(".js-next").attr("data-id", destination.id)
-
-      let categoryList = $()
-      data.categories.forEach(function (category) {
-        categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a></li>`)
+    history.pushState(null, null, "destinations")
+    fetch('/destinations.json')
+    .then(res => res.json())
+    .then(data => {
+      $('#app-container').html('')
+      data.data.forEach( destination => {
+        let newDestination = new Destination(destination)
+        let postHtml = newDestination.formatIndex()
+        $('#app-container').append(postHtml)
       })
-      $('#categories').html(categoryList)
     })
   })
-})
 
+  $(document).on('click', ".show_link", function(e) {
+    e.preventDefault()
+    $('#app-container').html('')
+    let id = $(this).attr('data-id')
+    fetch(`/destinations/${id}.json`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      let newDestination = new Destination(data.data)
+      let postHtml = newDestination.formatShow()
+      $('#app-container').append(postHtml)
+    })
+  })
 
-function Destination (id, name, description, country, best_season_to_visit, visited, categories) {
-  this.id = id
-  this.name = name
-  this.description = description
-  this.country = country
-  this.best_season_to_visit = best_season_to_visit
-  this.visited = visited
-  this.categories = categories
+  $(document).on("click", ".next-destination", function() {
+    let id = $(this).attr('data-id')
+    fetch(`destinations/${id}/next`)
+
+  })
 }
 
-Destination.prototype.formatShow = function() {
-  $('.name').text(`${this.name}`)
-  $('.description').text(`Description: ${this.description}`)
-  $('.country').text(`Country: ${this.country}`)
-  $('.best_season_to_visit').text(`Best season to visit: ${this.best_season_to_visit}`)
-  $('.visited').text(`${this.visited}`)
-  $(".edit-link").html(`<a href="/destinations/${this.id}/edit">Edit</a>`)
-  $(".delete-link").html(`<a href="/destinations/${this.id}/destroy">Delete</a>`)
+//constructor function
+function Destination(destination) {
+  this.id = destination.id
+  this.name = destination.attributes.name
+  this.description = destination.attributes.description
+  this.country = destination.attributes.country
+  this.best_season_to_visit = destination.attributes.best_season_to_visit
+  this.categories = destination.attributes.categories
+}
+
+Destination.prototype.formatIndex = function(){
+  let postHtml = `
+    <a href="/destinations/${this.id}" data-id="${this.id}" class="show_link"><h1>${this.name}</a>
+    <h4>${this.description}</h4>
+    `
+  return postHtml
+}
+
+Destination.prototype.formatShow = function(){
+  console.log(this)
+  let postHtml = `
+    <h1>${this.name}</h1>
+    <h4>Categories: </h4></br>
+    <h4>${this.categories.map(function(element){
+      return `${element.title}</br>` }).join('') }
+    </h4>`
+  return postHtml
 }
