@@ -1,5 +1,2 @@
 $("#category_title").val("")
-$("#category_climate").val("")
-$("#category_must_have_items").val("")
-var $li = $("div#categories li")
-$li.append("<%= j(render('categories/category', :category => @category)) %>")
+$("div#categories").append("<%= j(render('categories/category', :category => @category)) %>")

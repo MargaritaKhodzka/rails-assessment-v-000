@@ -11,25 +11,6 @@ $(function () {
   })
 })
 
-$(function () {
-  $('.js-next').on('click', function (e) {
-    e.preventDefault()
-    var nextId = parseInt($(".js-next").attr("data-id")) + 1
-    $.get('/categories/' + nextId + ".json", function (data) {
-      var category = new Category(data.id, data.title, data.climate, data.must_have_items, data.destinations)
-      $('.destinations').html('')
-      category.formatShow()
-      $(".js-next").attr("data-id", category.id)
-
-      let destinationList = $()
-      data.destinations.forEach(function (destination) {
-        destinationList = destinationList.add(`<ul><li><a href='/destinations/${destination['id']}'>${destination['name']}</a></li></ul>`)
-      })
-      $('#destinations').html(destinationList)
-    })
-  })
-})
-
 function Category (id, title, climate, must_have_items, destinations) {
   this.id = id
   this.title = title

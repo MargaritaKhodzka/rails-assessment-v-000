@@ -1,3 +1,17 @@
+$(document).ready(function() {
+  seeMore()
+})
+
+function seeMore() {
+  $(".js-more").on('click', function() {
+    var id = $(this).data("id")
+    $.get("/destinations/" + id + ".json", function(data) {
+      var descriptionText = "<p>" + data["description"] + "</p>"
+        $("#destination-" + id).html(descriptionText)
+    })
+  })
+}
+
 $(function () {
   $('form').submit(function (e) {
     e.preventDefault()
@@ -14,16 +28,6 @@ $(function () {
 })
 
 $(function () {
-  $(".js-more").on('click', function() {
-    var id = $(this).data("id")
-    $.get("/destinations/" + id + ".json", function(data) {
-      var descriptionText = "<p>" + data["description"] + "</p>"
-        $("#destination-" + id).html(descriptionText)
-    })
-  })
-})
-
-$(function () {
   $(".js-next").on("click", function (e) {
     e.preventDefault()
     var nextId = parseInt($(".js-next").attr("data-id")) + 1
@@ -32,18 +36,16 @@ $(function () {
       $('.categories').html('')
     destination.formatShow()
       $(".js-next").attr("data-id", destination.id)
+
       let categoryList = $()
       data.categories.forEach(function (category) {
-        categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a>
-          <ul>
-              <li>Climate: ${category['climate']}</li>
-              <li>Must Have Items: ${category['must_have_items']}</li>
-          </ul>`)
+        categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a></li>`)
       })
       $('#categories').html(categoryList)
     })
   })
 })
+
 
 function Destination (id, name, description, country, best_season_to_visit, visited, categories) {
   this.id = id
@@ -61,7 +63,6 @@ Destination.prototype.formatShow = function() {
   $('.country').text(`Country: ${this.country}`)
   $('.best_season_to_visit').text(`Best season to visit: ${this.best_season_to_visit}`)
   $('.visited').text(`${this.visited}`)
-  $(".add-category").html(`<a href="/destinations/${this.id}/categories/new">Add a new category to this destination</a>`)
   $(".edit-link").html(`<a href="/destinations/${this.id}/edit">Edit</a>`)
   $(".delete-link").html(`<a href="/destinations/${this.id}/destroy">Delete</a>`)
 }
