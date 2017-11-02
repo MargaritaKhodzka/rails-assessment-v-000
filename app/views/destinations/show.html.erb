@@ -20,9 +20,15 @@
   <%= form_for([@destination, @category], :remote => true) do |f|  %>
     <%= f.label :title, 'Title' %>
     <%= f.text_field :title %><br>
+    <%= f.label :climate, 'Climate' %>
+    <%= f.text_field :climate %><br>
+    <%= f.label :must_have_items, 'Must Have' %>
+    <%= f.text_field :must_have_items %><br>
     <p><%= f.submit %></p>
   <% end %>
+
 <%= javascript_include_tag "destinations" %>
+
 <div class="edit-link">
   <%= link_to "Edit", edit_destination_path(@destination) %>
 </div>

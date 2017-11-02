@@ -22,7 +22,11 @@ $(".js-next").on("click", function (e) {
 
     let categoryList = $()
     data.categories.forEach(function (category) {
-      categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a></li>`)
+      categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a>
+      <ul>
+        <li>Climate: ${category['climate']}</li>
+        <li>Must Have: ${category['must_have_items']}</li>
+      </ul>`)
     })
     $('#categories').html(categoryList)
   })
@@ -45,7 +49,7 @@ Destination.prototype.formatShow = function() {
   $('.country').text(`Country: ${this.country}`)
   $('.best_season_to_visit').text(`Best season to visit: ${this.best_season_to_visit}`)
   $('.visited').text(`${this.visited}`)
-  $('.categories').text(`${this.categories}`)
+  $(".add-category").html(`<a href="/destinations/${this.id}/categories/new">Add a new category to this destination</a>`)
   $('.edit-link').html(`<a href="/destinations/${this.id}/edit">Edit</a>`)
   $('.delete-link').html(`<a href="/destinations/${this.id}/destroy">Delete</a>`)
 }
