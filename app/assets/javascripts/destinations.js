@@ -16,10 +16,11 @@ $(".js-next").on("click", function (e) {
   var nextId = parseInt($(".js-next").attr("data-id")) + 1
   $.get('/destinations/' + nextId + ".json", function (data) {
     var destination = new Destination(data.id, data.name, data.description, data.country, data.best_season_to_visit, data.visited, data.categories)
-    $('.categories').html('')
     destination.formatShow()
-    $(".js-next").attr("data-id", destination.id)
+    $('.categories').html('')
 
+    // re-set the id to current on the link
+    $(".js-next").attr("data-id", destination.id)
     let categoryList = $()
     data.categories.forEach(function (category) {
       categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a>

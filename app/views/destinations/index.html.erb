@@ -13,13 +13,15 @@
 <% end %>
 
 
-
+<!-- consuming json from the api -->
 <script type="text/javascript" charset="utf-8">
 $(function () {
   $(".js-more").on('click', function() {
     var id = $(this).data("id")
+    // change the URL to the new route
     $.get("/destinations/" + id + ".json", function(data) {
       var descriptionText = "<p>" + data["description"] + "</p>"
+      // Replace text of destination-id div
         $("#destination-" + id).html(descriptionText)
     })
   })
