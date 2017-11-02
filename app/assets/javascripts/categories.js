@@ -21,8 +21,8 @@ function Category (id, title, climate, must_have_items, destinations) {
 
 Category.prototype.formatShow = function() {
   $('.title').text(`${this.title} category`)
-  $('.climate').text(`Climate: ${this.climate}`)
-  $('.must_have_items').text(`Must Have Items: ${this.must_have_items}`)
+  $('.climate').text(`<b>Climate:</b> ${this.climate}`)
+  $('.must_have_items').text(`<b>Must Have:</b> ${this.must_have_items}`)
   $(".edit-link").html(`<a href="/categories/${this.id}/edit">Edit</a>`)
   $(".delete-link").html(`<a href="/categories/${this.id}/destroy">Delete</a>`)
 }

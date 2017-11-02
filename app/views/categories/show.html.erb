@@ -1,10 +1,12 @@
-<h2 class="title"><%= @category.title %> category</h2>
-<p class="climate">Climate: <%= @category.climate %></p>
-<p class="must_have_items">Must have items: <%= @category.must_have_items %></p>
+<h2 id="title"><%= @category.title %> category</h2>
+<p id="climate"><b>Climate:</b> <%= @category.climate %></p>
+<p id="must_have_items"><b>Must have:</b> <%= @category.must_have_items %></p>
 
 <h3>See destinations in this category:</h3>
   <div id="destinations">
-    <%= render (@destinations) %>
+    <% @destinations.each do |destination| %>
+      <li><%= link_to destination.name, destination_path(destination) %></li>
+    <% end %>
   </div>
 <br><br>
 
@@ -16,6 +18,6 @@
   <%= link_to "Delete", category_path(@category), method: :delete, data: { confirm: 'Are you sure you want to delete this category?' } %>
 </div>
 
-<%= javascript_include_tag "categories" %>
-
 <%= link_to 'Back', categories_path %>
+
+<%= javascript_include_tag "categories" %>

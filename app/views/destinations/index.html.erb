@@ -4,8 +4,6 @@
   <ul>
     <% @destinations.each do |destination| %>
       <%= render partial: "destination", locals: {destination: destination} %>
-      <div id="destination-<%= destination.id %>"><%= truncate(destination.description) %></div>
-      <button class="js-more" data-id="<%= destination.id %>">See more</button>
     <% end %>
   </ul>
   <%= button_to 'Add a destination', new_destination_path, class: 'btn btn-primary', method: :get %>
@@ -13,3 +11,17 @@
   <h3>You haven't added any destinations to your bucket list yet!</h3>
   <%= button_to 'Add a destination', new_destination_path, class: 'btn btn-primary', method: :get %>
 <% end %>
+
+
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $(".js-more").on('click', function() {
+    var id = $(this).data("id")
+    $.get("/destinations/" + id + ".json", function(data) {
+      var descriptionText = "<p>" + data["description"] + "</p>"
+        $("#destination-" + id).html(descriptionText)
+    })
+  })
+})
+</script>

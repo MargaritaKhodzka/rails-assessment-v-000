@@ -1,3 +1,5 @@
 <li>
   <%= link_to destination.name, destination_path(destination) %>
+  <div id="destination-<%= destination.id %>"><%= truncate destination.description %></div>
+  <button class="js-more" data-id="<%= destination.id %>">See more</button>
 </li>

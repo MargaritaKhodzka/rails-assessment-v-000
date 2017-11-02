@@ -5,10 +5,6 @@ class DestinationsController < ApplicationController
 
   def index
     @destinations = current_user.destinations
-    respond_to do |format|
-      format.html { render :index }
-      format.json { render json: @destinations }
-    end
   end
 
   def new
@@ -17,9 +13,9 @@ class DestinationsController < ApplicationController
   end
 
   def create
-    @destination = Destination.new(destination_params)
+    @destination = Destination.create(destination_params)
     if @destination.save
-      render json: @destination, status: 201
+      render json: @post, status: 201
     else
       render :new
     end

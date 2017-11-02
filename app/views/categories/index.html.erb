@@ -4,8 +4,8 @@
   <% @categories.each do |category| %>
     <li><%= link_to category.title, category_path(category) %></li>
     <ul>
-      <li><%= category.climate %></li>
-      <li><%= category.must_have_items %></li>
+      <li><b>Climate:</b> <%= category.climate %></li>
+      <li><b>Must Have:</b> <%= category.must_have_items %></li>
     </ul>
   <% end %>
 <% else %>

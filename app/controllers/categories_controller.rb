@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_destination
-  before_action :current_category
+  before_action :find_destination, only: %i[index new create]
+  before_action :current_category, only: %i[show edit update destroy]
 
   def index
     @categories = Category.all
