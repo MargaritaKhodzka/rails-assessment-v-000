@@ -1,3 +1,15 @@
+(function(){
+  $(document).on('click', ".js-more", function() {
+    var id = $(this).data("id")
+    // change the URL to the new route
+    $.get("/destinations/" + id + ".json", function(data) {
+      var descriptionText = "<p>" + data["description"] + "</p>"
+      // Replace text of destination-id div
+      $("#destination-" + id).html(descriptionText)
+    })
+  })
+})()
+
 $('form').submit(function (e) {
   e.preventDefault()
   var values = $(this).serialize()
@@ -11,19 +23,21 @@ $('form').submit(function (e) {
   })
 })
 
+var destination
+
 $(".js-next").on("click", function (e) {
   e.preventDefault()
-  var nextId = parseInt($(".js-next").attr("data-id")) + 1
-  $.get('/destinations/' + nextId + ".json", function (data) {
-    var destination = new Destination(data.id, data.name, data.description, data.country, data.best_season_to_visit, data.visited, data.categories)
-    destination.formatShow()
-    $('.categories').html('')
 
-    // re-set the id to current on the link
+  var id = parseInt($(".js-next").attr("data-id"))
+  $.get(`/destinations/${id}/next.json`, function (data) {
+    destination = new Destination(data.id, data.name, data.description, data.country, data.best_season_to_visit, data.visited, data.categories)
+    $('.categories').html('')
+    destination.formatShow()
     $(".js-next").attr("data-id", destination.id)
+    $(".new_category").attr("action", `/destinations/${destination.id}/categories`)
     let categoryList = $()
     data.categories.forEach(function (category) {
-      categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a>
+      categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a></li>
       <ul>
         <li>Climate: ${category['climate']}</li>
         <li>Must Have: ${category['must_have_items']}</li>
@@ -50,7 +64,8 @@ Destination.prototype.formatShow = function() {
   $('.country').text(`Country: ${this.country}`)
   $('.best_season_to_visit').text(`Best season to visit: ${this.best_season_to_visit}`)
   $('.visited').text(`${this.visited}`)
-  $(".add-category").html(`<a href="/destinations/${this.id}/categories/new">Add a new category to this destination</a>`)
+  $('.categories').text(`${this.categories}`)
+  $('.add-category').html(`<a href="/destinations/${this.id}/categories/new">Add a new category to this destination</a>`)
   $('.edit-link').html(`<a href="/destinations/${this.id}/edit">Edit</a>`)
   $('.delete-link').html(`<a href="/destinations/${this.id}/destroy">Delete</a>`)
 }

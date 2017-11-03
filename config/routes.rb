@@ -9,11 +9,13 @@ Rails.application.routes.draw do
   resources :categories
 
   root 'welcome#home'
-  
+
   authenticated :user do
     root to: 'destinations#index', as: :authenticated_root
   end
 
   get '/visited_destinations', to: 'users#user_visited'
+
+  get '/destinations/:id/next', to: 'destinations#next'
 
 end

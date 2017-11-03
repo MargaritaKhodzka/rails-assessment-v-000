@@ -12,16 +12,16 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @category = @destination.categories.build
+    @category = Category.new
   end
 
   def create
-    @category = Category.new(category_params)
+    @category = @destination.categories.build(category_params)
     @category.destination_ids = params[:destination_id]
     if @category.save
-      render json: @category, status: 201
+      render 'create.js', :layout => false
     else
-      render :new
+      render "destinations/show"
     end
   end
 

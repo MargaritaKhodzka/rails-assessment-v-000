@@ -13,7 +13,7 @@ class DestinationsController < ApplicationController
   end
 
   def create
-    @destination = Destination.new(destination_params)
+    @destination = Destination.create(destination_params)
     if @destination.save
       redirect_to @destination
     else
@@ -24,6 +24,7 @@ class DestinationsController < ApplicationController
   def show
     if current_destination
       @categories = @destination.categories
+      @category = Category.new
       respond_to do |f|
         f.html { render :show }
         f.json { render json: @destination }
@@ -31,6 +32,11 @@ class DestinationsController < ApplicationController
     else
       redirect_to destinations_path
     end
+  end
+
+  def next
+    next_destination = current_destination.next
+    render json: next_destination
   end
 
   def edit
