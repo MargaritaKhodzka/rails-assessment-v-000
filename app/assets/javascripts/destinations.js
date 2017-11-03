@@ -23,11 +23,8 @@ $('form').submit(function (e) {
   })
 })
 
-var destination
-
 $(".js-next").on("click", function (e) {
   e.preventDefault()
-
   var id = parseInt($(".js-next").attr("data-id"))
   $.get(`/destinations/${id}/next.json`, function (data) {
     destination = new Destination(data.id, data.name, data.description, data.country, data.best_season_to_visit, data.visited, data.categories)
@@ -47,6 +44,22 @@ $(".js-next").on("click", function (e) {
   })
 })
 
+$(function() {
+  $(".new_category").on("submit", function (e) {
+    e.preventDefault()
+    $.ajax({
+      type: ($("input[name='_method']").val() || this.method),
+      url: this.action,
+      data: $(this).serialize(),
+      success: function (response) {
+        $("#category_title").val("")
+        $("#category_climate").val("")
+        $("#category_must_have_items").val("")
+        $("div#categories").append(response)
+      }
+    })
+  })
+})
 
 function Destination (id, name, description, country, best_season_to_visit, visited, categories) {
   this.id = id
@@ -65,7 +78,6 @@ Destination.prototype.formatShow = function() {
   $('.best_season_to_visit').text(`Best season to visit: ${this.best_season_to_visit}`)
   $('.visited').text(`${this.visited}`)
   $('.categories').text(`${this.categories}`)
-  $('.add-category').html(`<a href="/destinations/${this.id}/categories/new">Add a new category to this destination</a>`)
   $('.edit-link').html(`<a href="/destinations/${this.id}/edit">Edit</a>`)
   $('.delete-link').html(`<a href="/destinations/${this.id}/destroy">Delete</a>`)
 }

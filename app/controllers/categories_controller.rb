@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
     @category = @destination.categories.build(category_params)
     @category.destination_ids = params[:destination_id]
     if @category.save
-      render 'create.js', :layout => false
+      render 'categories/show', :layout => false
     else
       render "destinations/show"
     end
