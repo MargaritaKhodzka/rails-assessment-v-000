@@ -19,7 +19,6 @@ class CategoriesController < ApplicationController
     @category = @destination.categories.build(category_params)
     @category.destination_ids = params[:destination_id]
     if @category.save
-
       respond_to do |f|
         f.json { render json: @category }
       end

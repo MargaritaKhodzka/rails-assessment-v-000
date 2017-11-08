@@ -5,6 +5,10 @@ class DestinationsController < ApplicationController
 
   def index
     @destinations = current_user.destinations
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @destinations }
+    end
   end
 
   def new

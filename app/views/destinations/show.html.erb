@@ -5,11 +5,13 @@
 <p class="country"><b>Country:</b> <%= @destination.country %></p>
 <p class="best_season_to_visit"><b>Best season to visit:</b> <%= @destination.best_season_to_visit %></p>
 
-<% if @destination.visited %>
-  <p><b>You visited this destination!</b></p>
-<% else %>
-  <p><b>You have not visited this destination yet.</b></p>
-<% end %>
+<div class="visited">
+  <% if @destination.visited %>
+    <p><b>You visited this destination!</b></p>
+  <% else %>
+    <p><b>You have not visited this destination yet.</b></p>
+  <% end %>
+</div>
 
 <h3>Destination categories:</h3>
 <div id="categories">

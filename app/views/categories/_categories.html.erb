@@ -1,7 +1,7 @@
 <% @destination.categories.each do |category| %>
-<li><%= link_to category.title, destination_category_path(@destination, category) %></li>
-<ul>
-  <li><%= category.climate %></li>
-  <li><%= category.must_have_items %></li>
-</ul>
+  <li><%= link_to category.title, destination_category_path(@destination, category) %></li>
+  <ul>
+    <li><%= category.climate %></li>
+    <li><%= category.must_have_items %></li>
+  </ul>
 <% end %>

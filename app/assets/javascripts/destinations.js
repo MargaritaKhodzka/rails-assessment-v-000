@@ -35,11 +35,7 @@ $(".js-next").on("click", function (e) {
     $(".new_category").attr("action", `/destinations/${destination.id}/categories`)
     let categoryList = $()
     data.categories.forEach(function (category) {
-      categoryList = categoryList.add(`<li><a href='/categories/${category['id']}'>${category['title']}</a></li>
-      <ul>
-        <li>Climate: ${category['climate']}</li>
-        <li>Must Have: ${category['must_have_items']}</li>
-      </ul>`)
+      categoryList = categoryList.add(addCategoryAttr(category))
     })
     $('#categories').html(categoryList)
   })
@@ -58,15 +54,19 @@ $(function() {
         $("#category_title").val("")
         $("#category_climate").val("")
         $("#category_must_have_items").val("")
-        $("div#categories").append(`<li><a href='/categories/${response['id']}'>${response['title']}</a></li>
-        <ul>
-          <li>Climate: ${response['climate']}</li>
-          <li>Must Have: ${response['must_have_items']}</li>
-        </ul>`)
+        $("div#categories").append(addCategoryAttr(response))
       }
     })
   })
 })
+
+function addCategoryAttr(response) {
+  return `<li><a href='/categories/${response['id']}'>${response['title']}</a></li>
+    <ul>
+      <li>Climate: ${response['climate']}</li>
+      <li>Must Have: ${response['must_have_items']}</li>
+    </ul>`
+}
 
 function Destination (id, name, description, country, best_season_to_visit, visited, categories) {
   this.id = id
@@ -83,7 +83,7 @@ Destination.prototype.formatShow = function() {
   $('.description').text(`Description: ${this.description}`)
   $('.country').text(`Country: ${this.country}`)
   $('.best_season_to_visit').text(`Best season to visit: ${this.best_season_to_visit}`)
-  $('.visited').text(`${this.visited}`)
+  $('.visited').html(`${this.visited ? '<p><b>You visited this destination!</b></p>' : '<p><b>You have not visited this destination yet.</b></p>'}`)
   $('.categories').text(`${this.categories}`)
   $('.edit-link').html(`<a href="/destinations/${this.id}/edit">Edit</a>`)
   $('.delete-link').html(`<a href="/destinations/${this.id}/destroy">Delete</a>`)
