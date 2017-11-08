@@ -10,7 +10,7 @@
   })
 })()
 
-$('form').submit(function (e) {
+$('form#new_destination').submit(function (e) {
   e.preventDefault()
   var values = $(this).serialize()
   var posting = $.post('/destinations', values)
@@ -25,6 +25,7 @@ $('form').submit(function (e) {
 
 $(".js-next").on("click", function (e) {
   e.preventDefault()
+
   var id = parseInt($(".js-next").attr("data-id"))
   $.get(`/destinations/${id}/next.json`, function (data) {
     destination = new Destination(data.id, data.name, data.description, data.country, data.best_season_to_visit, data.visited, data.categories)
@@ -45,8 +46,10 @@ $(".js-next").on("click", function (e) {
 })
 
 $(function() {
-  $(".new_category").on("submit", function (e) {
+  $(".new_category").submit (
+    function (e) {
     e.preventDefault()
+    e.stopImmediatePropagation()
     $.ajax({
       type: ($("input[name='_method']").val() || this.method),
       url: this.action,
@@ -55,7 +58,11 @@ $(function() {
         $("#category_title").val("")
         $("#category_climate").val("")
         $("#category_must_have_items").val("")
-        $("div#categories").append(response)
+        $("div#categories").append(`<li><a href='/categories/${response['id']}'>${response['title']}</a></li>
+        <ul>
+          <li>Climate: ${response['climate']}</li>
+          <li>Must Have: ${response['must_have_items']}</li>
+        </ul>`)
       }
     })
   })

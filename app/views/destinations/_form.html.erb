@@ -1,5 +1,5 @@
 <%= render 'layouts/form_messages', object: destination %>
-<%= form_for destination do |f| %>
+<%= form_for destination, html: {class: "destinationForm"} do |f| %>
   <%= f.hidden_field :user_id %>
 
   <div class="form-group">

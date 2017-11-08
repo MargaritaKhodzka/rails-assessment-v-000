@@ -15,7 +15,10 @@ class DestinationsController < ApplicationController
   def create
     @destination = Destination.create(destination_params)
     if @destination.save
-      redirect_to @destination
+      respond_to do |format|
+        format.html { redirect_to @destination }
+        format.json { render :show }
+      end
     else
       render :new
     end
