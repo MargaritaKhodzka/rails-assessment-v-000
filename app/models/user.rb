@@ -20,4 +20,13 @@ class User < ApplicationRecord
     end
   end
 
+  def next_destination(id)
+    next_destination = self.destinations.where("id > ?", id).first
+    if next_destination
+      next_destination
+    else
+    self.destinations.first
+    end
+  end
+
 end

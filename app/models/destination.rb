@@ -18,13 +18,4 @@ class Destination < ApplicationRecord
      self.all.collect {|destination| destination if destination.visited}
    end
 
-   def next
-     next_destination = Destination.where("id > ?", self.id).first
-     if next_destination
-       next_destination
-     else
-       Destination.first
-     end
-   end
-
 end

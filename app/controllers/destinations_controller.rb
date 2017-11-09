@@ -42,7 +42,7 @@ class DestinationsController < ApplicationController
   end
 
   def next
-    next_destination = current_destination.next
+    next_destination = current_user.next_destination(current_destination.id)
     render json: next_destination
   end
 
