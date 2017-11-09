@@ -29,7 +29,7 @@ class DestinationsController < ApplicationController
   end
 
   def show
-    if current_destination
+    if current_destination && current_user
       @categories = @destination.categories
       @category = Category.new
       respond_to do |f|
