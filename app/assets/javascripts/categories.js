@@ -1,13 +1,13 @@
-// $('form').submit(function (e) {
-//   e.preventDefault()
-//   var values = $(this).serialize()
-//   var posting = $.post('/categories', values)
-//   posting.done(function (data) {
-//     $('#title').text(`${data['title']}`)
-//     $('#climate').text(`Rating: ${data['climate']}`)
-//     $('#must_have_items').text(`Notes: ${data['must_have_items']}`)
-//   })
-// })
+$('form').submit(function (e) {
+  e.preventDefault()
+  var values = $(this).serialize()
+  var posting = $.post('/categories', values)
+  posting.done(function (data) {
+    $('#title').text(`${data['title']}`)
+    $('#climate').text(`Rating: ${data['climate']}`)
+    $('#must_have_items').text(`Notes: ${data['must_have_items']}`)
+  })
+})
 //
 // function Category (id, title, climate, must_have_items, destinations) {
 //   this.id = id
