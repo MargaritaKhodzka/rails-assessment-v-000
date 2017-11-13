@@ -28,10 +28,12 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @destinations = current_user.destinations
-    respond_to do |f|
-      f.html { render :show }
-      f.json { render json: @category }
+    if current_user
+      @destinations = @category.destinations
+      respond_to do |f|
+        f.html { render :show }
+        f.json { render json: @category }
+      end
     end
   end
 
