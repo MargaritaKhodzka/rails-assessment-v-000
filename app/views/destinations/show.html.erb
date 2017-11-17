@@ -13,10 +13,7 @@
   <% end %>
 </div>
 
-<h3>Destination categories:</h3>
-<div id="categories">
-  <%= render 'categories/categories' %>
-</div>
+<div id="categories"></div>
 
 <h4>Add a new category to this destination:</h4>
 <%= form_for([@destination, @category]) do |f| %>
