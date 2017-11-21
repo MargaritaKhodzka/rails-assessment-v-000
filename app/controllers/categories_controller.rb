@@ -6,12 +6,12 @@ class CategoriesController < ApplicationController
   def index
     if @destination
       @categories = @destination.categories
+      respond_to do |f|
+        f.html { render :index, layout: false }
+        f.json { render json: @categories }
+      end
     else
       @categories = current_user.categories
-    end
-    respond_to do |f|
-      f.html { render :index }
-      f.json { render json: @categories }
     end
   end
 
@@ -20,7 +20,6 @@ class CategoriesController < ApplicationController
   end
 
   def create
-
     @category = @destination.categories.build(category_params)
     @category.destination_ids = params[:destination_id]
     @category.save

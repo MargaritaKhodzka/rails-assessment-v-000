@@ -25,7 +25,7 @@ class User < ApplicationRecord
     if next_destination
       next_destination
     else
-    self.destinations.first
+      self.destinations.first
     end
   end
 
