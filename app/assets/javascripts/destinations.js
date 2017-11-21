@@ -1,17 +1,19 @@
 //1. Know how to use "this" and scope it and bind it to other functions
 
-$(document).ready(function() {
-  appendCategories()
+$(window).load(function() {
   bindEventListeners()
 })
 
-
-function appendCategories() {
-  var destinationId = parseInt($(".js-next").attr("data-id"))
-  $("#categories").load(`/destinations/${destinationId}/categories`)
-}
-
 function bindEventListeners() {
+  $("#button").on('click', function() {
+    var destinationId = parseInt($(".js-next").attr("data-id"))
+    $.get(`/destinations/${destinationId}/categories.json`, function(categories) {
+        $("div#categories")
+        var categoryList = categories.map(category => formatCategory(category)).join()
+        $("div#categories").append(categoryList)
+    })
+  })
+
   $(document).on('click', '.js-more', function() {
     var button = this
     var id = $(button).data("id")
